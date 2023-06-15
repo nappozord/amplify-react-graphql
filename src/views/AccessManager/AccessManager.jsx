@@ -59,7 +59,7 @@ export default function AccessManager(props) {
                                   ),
                                   children: (
                                       <VerificationCode
-                                          username={props.user.username}
+                                          user={props.user}
                                           setDrawer={props.setDrawer}
                                           setUser={props.setUser}
                                       />
@@ -76,7 +76,13 @@ export default function AccessManager(props) {
                                           Password Dimenticata
                                       </div>
                                   ),
-                                  children: <PasswordReset setDrawer={props.setDrawer} setUser={props.setUser} />,
+                                  children: (
+                                      <PasswordReset
+                                          setDrawer={props.setDrawer}
+                                          setUser={props.setUser}
+                                          setReset={props.setReset}
+                                      />
+                                  ),
                               },
                           ]
                         : itemsTab

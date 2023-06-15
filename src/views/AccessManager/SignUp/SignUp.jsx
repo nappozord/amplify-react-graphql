@@ -39,14 +39,24 @@ export default function SignUp(props) {
                 attributes: {
                     email,
                 },
+                autoSignIn: {
+                    enabled: true,
+                }
             })
                 .then((r) => {
                     setLoading(false);
                     setError(null);
                     props.setVerification(true);
-                    props.setUser(r);
+                    console.log(r);
+                    props.setUser({
+                        username,
+                        toConfirm: true,
+                        attributes: {
+                            email
+                        }
+                    });
                 })
-                .catch((e) => {
+                .catch(() => {
                     setLoading(false);
                     setError('Utente già registrato');
                 });

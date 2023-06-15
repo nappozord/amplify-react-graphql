@@ -24,6 +24,7 @@ export default function App() {
         if (firstUpdate.current) {
             firstUpdate.current = false;
             Auth.currentUserInfo().then((r) => {
+                console.log(r);
                 setUser(r);
                 setLoading(false);
             });

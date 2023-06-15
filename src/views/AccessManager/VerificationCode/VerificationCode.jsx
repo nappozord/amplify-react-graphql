@@ -10,7 +10,7 @@ export default function VerificationCode(props) {
     const [codeResent, setCodeResent] = useState(0);
 
     const resendCode = () => {
-        Auth.resendSignUp(props.username)
+        Auth.resendSignUp(props.user)
             .then(() => {
                 setCodeResent(1);
             })
@@ -23,12 +23,15 @@ export default function VerificationCode(props) {
         if (!code) setError('Codice non valido');
         else {
             setLoading(true);
-            Auth.confirmSignUp(props.username, code)
-                .then((r) => {
-                    setLoading(false);
+            Auth.confirmSignUp(props.user.username, code)
+                .then(() => {
                     setError(false);
+                    setLoading(false);
                     props.setDrawer(false);
-                    props.setUser(r);
+                    props.setUser({
+                        ...props.user,
+                        toConfirm: false
+                    });
                 })
                 .catch(() => {
                     setLoading(false);

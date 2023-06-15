@@ -79,7 +79,7 @@ export default function HeaderBar(props) {
                     }}
                 />
             </div>
-            {!props.user || !props.user.username ? (
+            {!props.user || props.user.toConfirm ? (
                 <div style={{ right: 40, position: 'absolute' }}>
                     <div style={{ marginTop: 4 }}>
                         <Button size="large" type="primary" icon={<LoginOutlined />} onClick={() => setDrawer(!drawer)}>

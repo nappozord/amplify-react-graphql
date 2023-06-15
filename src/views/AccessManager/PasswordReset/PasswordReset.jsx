@@ -21,7 +21,7 @@ export default function PasswordReset(props) {
                     setLoading(false);
                     setErrorUsername(null);
                     setValidUsername(true);
-                    props.setUser(r);
+                    props.setUser({ username, toConfirm: true });
                 })
                 .catch(() => {
                     setLoading(false);
@@ -31,10 +31,13 @@ export default function PasswordReset(props) {
             if (password === confirmPassword) {
                 setLoading(true);
                 Auth.forgotPasswordSubmit(username, code, password)
-                    .then(() => {
-                        setLoading(false);
-                        setError(null);
-                        props.setDrawer(false);
+                    .then((r) => {
+                        Auth.signIn(username, password)
+                            .then(r => {
+                                setLoading(false);
+                                setError(null);
+                                console.log(r);
+                            });
                     })
                     .catch(() => {
                         setLoading(false);
