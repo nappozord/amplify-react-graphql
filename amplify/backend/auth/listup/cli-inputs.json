@@ -1,10 +1,10 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "amplifyreactgraphqlf59dd17a_identitypool_f59dd17a",
+    "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "ampliff59dd17a",
-    "userPoolName": "amplifyreactgraphqlf59dd17a_userpool_f59dd17a",
+    "resourceNameTruncated": "listup31b7e27b",
+    "userPoolName": "listup",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -27,14 +27,22 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "ampliff59dd17a_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "listup31b7e27b_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "f59dd17a",
-    "resourceName": "amplifyreactgraphqlf59dd17a",
+    "sharedId": "31b7e27b",
+    "resourceName": "listup",
     "authSelections": "identityPoolAndUserPool",
-    "useDefault": "manual",
-    "userPoolGroupList": [],
     "serviceName": "Cognito",
+    "useDefault": "manual",
+    "userPoolGroups": false,
+    "userPoolGroupList": [],
+    "adminQueries": false,
+    "hostedUI": true,
+    "hostedUIDomainName": "pknp9xvhbo1g",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
     "usernameCaseSensitive": false,
     "useEnabledMfas": true,
     "authRoleArn": {
@@ -51,16 +59,8 @@
     },
     "breakCircularDependency": true,
     "dependsOn": [],
-    "hostedUI": true,
-    "hostedUIDomainName": "amplifyreactgraphql23e0b3d3-23e0b3d3",
-    "authProvidersUserPool": [
-      "Google"
-    ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.listup.it\"],\"LogoutURLs\":[\"https://www.listup.it\"]}",
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://www.listup.it/\"],\"LogoutURLs\":[\"https://www.listup.it/\"]}",
     "authProviders": [],
-    "userPoolGroups": false,
-    "adminQueries": false,
     "thirdPartyAuth": false
   }
 }

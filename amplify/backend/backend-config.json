@@ -1,6 +1,6 @@
 {
   "auth": {
-    "amplifyreactgraphqlf59dd17a": {
+    "listup": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
