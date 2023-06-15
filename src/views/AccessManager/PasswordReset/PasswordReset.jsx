@@ -36,7 +36,8 @@ export default function PasswordReset(props) {
                             .then(r => {
                                 setLoading(false);
                                 setError(null);
-                                console.log(r);
+                                props.setUser(r);
+                                props.setDrawer(false);
                             });
                     })
                     .catch(() => {
