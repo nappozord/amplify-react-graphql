@@ -1,0 +1,12 @@
+.curved-mask-bottom {
+    z-index: 0;
+    height: 70px;
+    background-position: 50% 100%;
+    background-image: url('../../../assets/mask.svg');
+    background-size: cover;
+    position: absolute;
+    top: auto;
+    transform: rotate(180deg);
+    left: 0;
+    right: 0;
+}
