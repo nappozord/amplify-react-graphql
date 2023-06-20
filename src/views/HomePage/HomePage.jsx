@@ -1,13 +1,12 @@
 import './HomePage.css';
-import { theme } from 'antd';
+import { Typography } from 'antd';
+const {Text} = Typography;
 
 export default function HomePage() {
-    const { token } = theme.useToken();
 
     return (
-        <div style={{ backgroundColor: token.colorPrimaryBg, position: 'relative', marginTop: -64 }}>
-            <div style={{ height: 500 }} />
-            <div className="curved-mask-top" />
+        <div>
+            <Text strong>HELLO!</Text>
         </div>
     );
 }
