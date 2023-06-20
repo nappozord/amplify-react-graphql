@@ -46,6 +46,7 @@ export default function HeaderAvatar(props) {
         <a style={{ color: 'inherit' }}>
             <Dropdown placement={'bottomRight'} menu={{ items, onClick: selectItem }} trigger={['click']}>
                 <Avatar
+                    src={props.user.attributes.picture}
                     style={{
                         backgroundColor: getColor(props.user.username),
                         marginRight: 8,
