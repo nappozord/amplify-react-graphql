@@ -25,7 +25,7 @@ export default function App() {
             firstUpdate.current = false;
             Auth.currentUserInfo().then((r) => {
                 console.log(r);
-                if(r.attributes.nickname){
+                if(r && r.attributes && r.attributes.nickname){
                     r.username = r.attributes.nickname;
                 }
                 setUser(r);
