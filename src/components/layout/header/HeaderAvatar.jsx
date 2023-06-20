@@ -1,5 +1,5 @@
 import { Avatar, Dropdown, Space, Typography } from 'antd';
-import { DownOutlined, LogoutOutlined, MailOutlined } from '@ant-design/icons';
+import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import getColor from '../../../utils/Colors';
 import React from 'react';
 import { Auth } from 'aws-amplify';
@@ -8,18 +8,21 @@ const { Text } = Typography;
 export default function HeaderAvatar(props) {
     const items = [
         {
-            label: <div>{props.user.attributes.email}</div>,
-            icon: <MailOutlined />,
+            label: (
+                <Text strong style={{ fontSize: 20 }}>
+                    {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                </Text>
+            ),
+            icon: <UserOutlined style={{ fontSize: 20, marginRight: 16 }} />,
             key: '0',
         },
         {
             type: 'divider',
         },
         {
-            label: 'Logout',
-            icon: <LogoutOutlined />,
+            label: <Text style={{ fontSize: 16 }}>Esci</Text>,
+            icon: <LogoutOutlined style={{ fontSize: 20, marginRight: 16 }} />,
             key: '9999',
-            danger: true,
         },
     ];
 
@@ -41,16 +44,24 @@ export default function HeaderAvatar(props) {
 
     return (
         <a style={{ color: 'inherit' }}>
-            <Avatar style={{ backgroundColor: getColor(props.user.username), marginRight: 8 }} size="large">
-                {props.user.username.charAt(0).toUpperCase()}
-            </Avatar>
-            <Dropdown menu={{ items, onClick: selectItem }} trigger={['click']}>
-                <Space>
+            <Dropdown placement={'bottomRight'} menu={{ items, onClick: selectItem }} trigger={['click']}>
+                <Avatar
+                    style={{
+                        backgroundColor: getColor(props.user.username),
+                        marginRight: 8,
+                        marginLeft: 16,
+                        marginTop: -6,
+                    }}
+                    size="large"
+                >
+                    {props.user.username.charAt(0).toUpperCase()}
+                </Avatar>
+                {/*<Space>
                     <Text strong style={{ fontSize: 16, fontWeight: 500 }}>
                         {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
                     </Text>
                     <DownOutlined />
-                </Space>
+                </Space>*/}
             </Dropdown>
         </a>
     );

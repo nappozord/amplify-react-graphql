@@ -1,45 +1,16 @@
 import React, { useState } from 'react';
-import { Button, Drawer, Image, Layout, Menu, Select, Input, Avatar } from 'antd';
-import { FireFilled, QuestionCircleFilled, LoginOutlined } from '@ant-design/icons';
+import { Button, Drawer, Image, Layout } from 'antd';
+import { LoginOutlined } from '@ant-design/icons';
 import logo from '@assets/logo.png';
 import './HeaderBar.css';
 import AccessManager from '../../../views/AccessManager/AccessManager';
-import getColor from '../../../utils/Colors';
 import HeaderAvatar from './HeaderAvatar';
+import HeaderPlus from './HeaderPlus';
+import HeaderNotification from './HeaderNotification';
+import HeaderSearch from './HeaderSearch';
 
-const { Option } = Select;
 const { Header } = Layout;
-const { Search } = Input;
 
-function getItem(label, key, icon, children) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-    };
-}
-
-const items = [
-    getItem(<span className="menu-label">Esplora ListUP!</span>, '1', <FireFilled style={{ fontSize: 20 }} />),
-    /*getItem(
-        <span className="menu-label">Categorie di tendenza</span>,
-        'sub1',
-        <FundFilled style={{ fontSize: 20 }} />,
-        [getItem('Nascita', '3'), getItem('Laurea', '4'), getItem('Addio al celibato', '5')],
-    ),
-    getItem(<span className="menu-label">Prodotti consigliati</span>, '9', <LikeFilled style={{ fontSize: 20 }} />),*/
-    getItem(<span className="menu-label">Come funziona</span>, '2', <QuestionCircleFilled style={{ fontSize: 20 }} />),
-];
-
-const selectCategory = (
-    <Select defaultValue="Tutte le categorie" style={{ backgroundColor: '#f0f0f0', minWidth: 150 }}>
-        <Option value="Tutte le categorie">Tutte le categorie</Option>
-        <Option value="Nascita">Nascita</Option>
-        <Option value="Laurea">Laurea</Option>
-        <Option value="Addio al celibato">Addio al celibato</Option>
-    </Select>
-);
 
 export default function HeaderBar(props) {
     const [drawer, setDrawer] = useState(false);
@@ -59,26 +30,7 @@ export default function HeaderBar(props) {
             }}
         >
             <Image preview={false} width={128} src={logo} />
-            <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
-                <Search
-                    size="large"
-                    placeholder="Inizia la ricerca!"
-                    addonBefore={selectCategory}
-                    onSearch={() => {}}
-                    enterButton
-                    style={{ marginTop: 16, width: '60%' }}
-                />
-                <Menu
-                    mode="horizontal"
-                    defaultSelectedKeys={['1']}
-                    items={items}
-                    style={{
-                        borderBottom: 0,
-                        marginLeft: 16,
-                        backgroundColor: 'transparent',
-                    }}
-                />
-            </div>
+            <HeaderSearch />
             {!props.user || props.user.toConfirm ? (
                 <div style={{ right: 40, position: 'absolute' }}>
                     <div style={{ marginTop: 4 }}>
@@ -96,6 +48,8 @@ export default function HeaderBar(props) {
                 </div>
             ) : (
                 <div style={{ right: 40, position: 'absolute' }}>
+                    <HeaderPlus user={props.user} />
+                    <HeaderNotification user={props.user} />
                     <HeaderAvatar user={props.user} setUser={props.setUser} />
                 </div>
             )}

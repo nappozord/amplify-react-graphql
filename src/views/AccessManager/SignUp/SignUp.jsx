@@ -41,7 +41,7 @@ export default function SignUp(props) {
                 },
                 autoSignIn: {
                     enabled: true,
-                }
+                },
             })
                 .then((r) => {
                     setLoading(false);
@@ -52,8 +52,8 @@ export default function SignUp(props) {
                         username,
                         toConfirm: true,
                         attributes: {
-                            email
-                        }
+                            email,
+                        },
                     });
                 })
                 .catch(() => {

@@ -2,6 +2,7 @@ import { Alert, Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
+import ResendCode from '../../../components/layout/authentication/resendCode/ResendCode';
 
 export default function PasswordReset(props) {
     const [username, setUsername] = useState();
@@ -32,13 +33,12 @@ export default function PasswordReset(props) {
                 setLoading(true);
                 Auth.forgotPasswordSubmit(username, code, password)
                     .then((r) => {
-                        Auth.signIn(username, password)
-                            .then(r => {
-                                setLoading(false);
-                                setError(null);
-                                props.setUser(r);
-                                props.setDrawer(false);
-                            });
+                        Auth.signIn(username, password).then((r) => {
+                            setLoading(false);
+                            setError(null);
+                            props.setUser(r);
+                            props.setDrawer(false);
+                        });
                     })
                     .catch(() => {
                         setLoading(false);
@@ -120,6 +120,7 @@ export default function PasswordReset(props) {
                         Conferma
                     </Button>
                 </Form.Item>
+                {validUsername ? <ResendCode username={username} forgotPassword={true} /> : null}
             </Form>
         </div>
     );

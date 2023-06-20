@@ -2,22 +2,12 @@ import { Alert, Button, Divider, Form, Input, Tabs } from 'antd';
 import { GoogleOutlined, HolderOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
+import ResendCode from '../../../components/layout/authentication/resendCode/ResendCode';
 
 export default function VerificationCode(props) {
     const [code, setCode] = useState();
     const [loading, setLoading] = useState();
     const [error, setError] = useState(null);
-    const [codeResent, setCodeResent] = useState(0);
-
-    const resendCode = () => {
-        Auth.resendSignUp(props.user)
-            .then(() => {
-                setCodeResent(1);
-            })
-            .catch(() => {
-                setCodeResent(2);
-            });
-    };
 
     const onVerification = () => {
         if (!code) setError('Codice non valido');
@@ -30,7 +20,7 @@ export default function VerificationCode(props) {
                     props.setDrawer(false);
                     props.setUser({
                         ...props.user,
-                        toConfirm: false
+                        toConfirm: false,
                     });
                 })
                 .catch(() => {
@@ -75,26 +65,7 @@ export default function VerificationCode(props) {
                         Conferma Codice
                     </Button>
                 </Form.Item>
-                <Form.Item>
-                    <Button onClick={resendCode} type="default" size="large" style={{ width: '100%', marginTop: -8 }}>
-                        Rinvia Codice
-                    </Button>
-                </Form.Item>
-                {codeResent === 1 ? (
-                    <Alert
-                        message={'Codice di verifica inviato con successo'}
-                        type="success"
-                        style={{ marginBottom: 16, marginTop: -8 }}
-                        showIcon
-                    />
-                ) : codeResent === 2 ? (
-                    <Alert
-                        message={'Impossibile rinviare il codice di verifica'}
-                        type="error"
-                        style={{ marginBottom: 16, marginTop: -8 }}
-                        showIcon
-                    />
-                ) : null}
+                <ResendCode username={props.user.username} />
             </Form>
         </div>
     );
