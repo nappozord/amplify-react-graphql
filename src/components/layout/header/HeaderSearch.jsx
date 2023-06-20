@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {Select, Input, Dropdown, Button} from "antd";
 
 const {Option} = Select;
@@ -15,42 +15,45 @@ const selectCategory = (
 
 const items = [
     {
-        key: '0',
+        key: 'Tutte le categorie',
         label: 'Tutte le categorie',
     },
     {
-        key: '1',
+        key: 'Nascita',
         label: 'Nascita',
     },
     {
-        key: '2',
+        key: 'Laurea',
         label: 'Laurea',
     },
     {
-        key: '3',
+        key: 'Addio al celibato',
         label: 'Addio al celibato',
     },
 ];
 
-const dropdownCategory = (
-    <Dropdown menu={{ items }}>
-        <Button
-            type={'primary'}
-            style={{
-                fontSize: 16,
-                height: 38,
-                borderBottomRightRadius: 0,
-                borderTopRightRadius: 0,
-                marginLeft: -12,
-                marginRight: -12,
-            }}
-        >
-            Seleziona Categoria
-        </Button>
-    </Dropdown>
-);
-
 export default function HeaderSearch(props) {
+    const [category, setCategory] = useState('Tutte le categorie');
+
+    const dropdownCategory = (
+        <Dropdown menu={{ items, onClick: (value) => {setCategory(value.key)} }} >
+            <Button
+                type={'primary'}
+                style={{
+                    minWidth: 160,
+                    fontSize: 16,
+                    height: 38,
+                    borderBottomRightRadius: 0,
+                    borderTopRightRadius: 0,
+                    marginLeft: -12,
+                    marginRight: -12,
+                }}
+            >
+                {category}
+            </Button>
+        </Dropdown>
+    );
+
     return (
         <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
             <Search
