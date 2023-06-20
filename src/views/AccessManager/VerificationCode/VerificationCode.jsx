@@ -2,7 +2,7 @@ import { Alert, Button, Divider, Form, Input, Tabs } from 'antd';
 import { GoogleOutlined, HolderOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
-import ResendCode from '../../../components/layout/authentication/resendCode/ResendCode';
+import ResendCode from '../../../components/layout/authentication/ResendCode';
 
 export default function VerificationCode(props) {
     const [code, setCode] = useState();

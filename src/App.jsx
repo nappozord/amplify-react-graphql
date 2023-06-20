@@ -25,6 +25,9 @@ export default function App() {
             firstUpdate.current = false;
             Auth.currentUserInfo().then((r) => {
                 console.log(r);
+                if(r.attributes.nickname){
+                    r.username = r.attributes.nickname;
+                }
                 setUser(r);
                 setLoading(false);
             });

@@ -2,6 +2,7 @@ import { Alert, Button, Divider, Form, Input } from 'antd';
 import { GoogleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
+import FederatedSignIn from "../../../components/layout/authentication/FederatedSignIn";
 
 export default function SignIn(props) {
     const [username, setUsername] = useState();
@@ -35,16 +36,7 @@ export default function SignIn(props) {
     return (
         <div>
             <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off" onFinish={onSignIn}>
-                <Form.Item>
-                    <Button
-                        onClick={() => Auth.federatedSignIn({ provider: 'Google' })}
-                        size="large"
-                        style={{ width: '100%', marginTop: 4 }}
-                        icon={<GoogleOutlined />}
-                    >
-                        Accedi con Google
-                    </Button>
-                </Form.Item>
+                <FederatedSignIn text={"Accedi con Google"} />
                 <Form.Item>
                     <Divider style={{ marginTop: -16 }} />
                 </Form.Item>
