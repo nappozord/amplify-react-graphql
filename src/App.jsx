@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import './App.css';
+import {getUser} from "./services/apiManager";
 
 export default function App() {
     const { token } = theme.useToken();
@@ -26,9 +27,16 @@ export default function App() {
             firstUpdate.current = false;
             Auth.currentUserInfo().then((r) => {
                 console.log(r);
-                if(r && r.attributes && r.attributes.nickname){
+                if (r && r.attributes && r.attributes.nickname) {
                     r.username = r.attributes.nickname;
                 }
+                Auth.currentSession().then(data => {
+                    getUser(r.attributes.email, data.accessToken.jwtToken)
+                        .then((r) => {
+                            console.log(r);
+                        })
+                        .catch((e) => console.log(e));
+                });
                 setUser(r);
                 setLoading(false);
             });
