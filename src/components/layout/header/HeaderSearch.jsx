@@ -55,7 +55,7 @@ export default function HeaderSearch(props) {
     );
 
     return (
-        <div style={{ width: '80%', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Search
                 size="large"
                 placeholder="Inizia la ricerca!"

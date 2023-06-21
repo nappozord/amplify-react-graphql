@@ -29,7 +29,9 @@ export default function HeaderBar(props) {
                 paddingRight: 40,
             }}
         >
-            <Image preview={false} width={128} src={logo} />
+            <div style={{position: "absolute"}}>
+                <Image preview={false} width={124} src={logo}  />
+            </div>
             <HeaderSearch />
             {!props.user || props.user.toConfirm ? (
                 <div style={{ right: 40, position: 'absolute' }}>
