@@ -30,8 +30,10 @@ export default function App() {
                 if(r)
                     getUser(r.attributes.email).then(r => {
                         setUser(r.data);
+                        setLoading(false);
                     });
-                setLoading(false);
+                else
+                    setLoading(false);
             });
         }
     }, []);
