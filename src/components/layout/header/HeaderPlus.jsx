@@ -15,7 +15,7 @@ export default function HeaderPlus(props) {
             key: 'new',
         },
         {
-            label: <Text style={{ fontSize: 16 }}>Scopri</Text>,
+            label: <Text style={{ fontSize: 16 }}>Esplora</Text>,
             icon: <RadarChartOutlined style={{ fontSize: 20, marginRight: 16 }} />,
             key: 'trend',
         },

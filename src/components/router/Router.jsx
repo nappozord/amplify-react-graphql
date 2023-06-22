@@ -20,7 +20,7 @@ export default function Router(props) {
                 <Content>
                     <div style={{ backgroundColor: token.colorPrimaryBg, position: 'relative', marginTop: -64 }}>
                         <div style={{ height: 64 }} />
-                        <div style={{ height: 500, paddingLeft: '30vh', paddingRight: '30vh', paddingTop: 50 }}>
+                        <div style={{ height: 500, paddingLeft: '20vw', paddingRight: '20vw', paddingTop: 50 }}>
                             <Outlet />
                         </div>
                         <div className="curved-mask-top" />

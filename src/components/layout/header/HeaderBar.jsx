@@ -9,6 +9,7 @@ import HeaderAvatar from './HeaderAvatar';
 import HeaderPlus from './HeaderPlus';
 import HeaderNotification from './HeaderNotification';
 import HeaderSearch from './HeaderSearch';
+import HeaderSideMenu from './HeaderSideMenu';
 
 const { Header } = Layout;
 
@@ -30,16 +31,19 @@ export default function HeaderBar(props) {
                 paddingRight: 40,
             }}
         >
-            <a style={{ position: 'absolute' }}>
-                <Image
-                    preview={false}
-                    width={124}
-                    src={logo}
-                    onClick={() => {
-                        navigate('/');
-                    }}
-                />
-            </a>
+            <div style={{ position: 'absolute' }}>
+                {props.user && !props.user.toConfirm ? <HeaderSideMenu user={props.user} /> : null}
+                <a>
+                    <Image
+                        preview={false}
+                        width={124}
+                        src={logo}
+                        onClick={() => {
+                            navigate('/');
+                        }}
+                    />
+                </a>
+            </div>
             <HeaderSearch />
             {!props.user || props.user.toConfirm ? (
                 <div style={{ right: 40, position: 'absolute' }}>
