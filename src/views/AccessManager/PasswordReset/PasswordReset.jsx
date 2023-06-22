@@ -2,7 +2,7 @@ import { Alert, Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
-import ResendCode from '../../../components/layout/authentication/ResendCode';
+import ResendCode from '../../../components/authentication/ResendCode';
 
 export default function PasswordReset(props) {
     const [username, setUsername] = useState();

@@ -1,9 +1,9 @@
-import {Button, Form} from "antd";
-import {GoogleOutlined} from "@ant-design/icons";
-import {Auth} from "aws-amplify";
+import { Button, Form } from 'antd';
+import { GoogleOutlined } from '@ant-design/icons';
+import { Auth } from 'aws-amplify';
 
-export default function FederatedSignIn(props){
-    return(
+export default function FederatedSignIn(props) {
+    return (
         <Form.Item>
             <Button
                 onClick={() => Auth.federatedSignIn({ provider: 'Google' })}
@@ -14,5 +14,5 @@ export default function FederatedSignIn(props){
                 {props.text}
             </Button>
         </Form.Item>
-    )
+    );
 }

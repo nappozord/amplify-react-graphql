@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Select, Input, Dropdown, Button} from "antd";
+import React, { useState } from 'react';
+import { Select, Input, Dropdown, Button } from 'antd';
 
-const {Option} = Select;
-const {Search} = Input;
+const { Option } = Select;
+const { Search } = Input;
 
 const selectCategory = (
     <Select defaultValue="Tutte le categorie" style={{ backgroundColor: '#f0f0f0', minWidth: 150 }}>
@@ -36,7 +36,14 @@ export default function HeaderSearch(props) {
     const [category, setCategory] = useState('Tutte le categorie');
 
     const dropdownCategory = (
-        <Dropdown menu={{ items, onClick: (value) => {setCategory(value.key)} }} >
+        <Dropdown
+            menu={{
+                items,
+                onClick: (value) => {
+                    setCategory(value.key);
+                },
+            }}
+        >
             <Button
                 type={'primary'}
                 style={{

@@ -2,8 +2,8 @@ import { Alert, Button, Divider, Form, Input } from 'antd';
 import { GoogleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
-import FederatedSignIn from "../../../components/layout/authentication/FederatedSignIn";
-import {getUser} from "../../../services/apiManager";
+import FederatedSignIn from '../../../components/authentication/FederatedSignIn';
+import { getUser } from '../../../services/apiManager';
 
 export default function SignIn(props) {
     const [username, setUsername] = useState();
@@ -18,12 +18,12 @@ export default function SignIn(props) {
             Auth.signIn(username, password)
                 .then((r) => {
                     console.log(r);
-                    getUser(r.attributes.email).then(r => {
+                    getUser(r.attributes.email).then((r) => {
                         setLoading(false);
                         setError(null);
                         props.setUser(r.data);
                         props.setDrawer(false);
-                    })
+                    });
                 })
                 .catch((e) => {
                     setLoading(false);
@@ -40,7 +40,7 @@ export default function SignIn(props) {
     return (
         <div>
             <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off" onFinish={onSignIn}>
-                <FederatedSignIn text={"Accedi con Google"} />
+                <FederatedSignIn text={'Accedi con Google'} />
                 <Form.Item>
                     <Divider style={{ marginTop: -16 }} />
                 </Form.Item>

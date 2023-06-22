@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Drawer, Image, Layout } from 'antd';
 import { LoginOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import logo from '@assets/logo.png';
 import './HeaderBar.css';
 import AccessManager from '../../../views/AccessManager/AccessManager';
@@ -11,9 +12,9 @@ import HeaderSearch from './HeaderSearch';
 
 const { Header } = Layout;
 
-
 export default function HeaderBar(props) {
     const [drawer, setDrawer] = useState(false);
+    const navigate = useNavigate();
 
     return (
         <Header
@@ -29,9 +30,17 @@ export default function HeaderBar(props) {
                 paddingRight: 40,
             }}
         >
-            <div style={{position: "absolute"}}>
-                <Image preview={false} width={124} src={logo}  />
-            </div>
+            <a style={{ position: 'absolute' }}>
+                <Image
+                    preview={false}
+                    width={124}
+                    src={logo}
+                    onClick={() => {
+                        console.log('Hello');
+                        navigate('/');
+                    }}
+                />
+            </a>
             <HeaderSearch />
             {!props.user || props.user.toConfirm ? (
                 <div style={{ right: 40, position: 'absolute' }}>

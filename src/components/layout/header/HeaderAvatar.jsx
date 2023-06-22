@@ -5,14 +5,18 @@ import {
     SolutionOutlined,
     SettingOutlined,
     FormOutlined,
-    QuestionCircleOutlined, ExclamationCircleOutlined
+    QuestionCircleOutlined,
+    ExclamationCircleOutlined,
 } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import getColor from '../../../utils/Colors';
 import React from 'react';
 import { Auth } from 'aws-amplify';
 const { Text } = Typography;
 
 export default function HeaderAvatar(props) {
+    const navigate = useNavigate();
+
     const items = [
         {
             label: (
@@ -38,7 +42,7 @@ export default function HeaderAvatar(props) {
                 </Space>
             ),
             icon: <UserOutlined style={{ fontSize: 30, marginRight: 16 }} />,
-            key: 'UserInfo',
+            key: 'userinfo',
         },
         {
             type: 'divider',
@@ -46,17 +50,17 @@ export default function HeaderAvatar(props) {
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Il tuo profilo</Text>,
             icon: <SolutionOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Profile',
+            key: 'profile',
         },
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Gestisci account</Text>,
             icon: <FormOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Management',
+            key: 'management',
         },
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Esci</Text>,
             icon: <LogoutOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Logout',
+            key: 'logout',
         },
         {
             type: 'divider',
@@ -64,7 +68,7 @@ export default function HeaderAvatar(props) {
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Impostazioni</Text>,
             icon: <SettingOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Setting',
+            key: 'setting',
         },
         {
             type: 'divider',
@@ -72,27 +76,41 @@ export default function HeaderAvatar(props) {
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Guida</Text>,
             icon: <QuestionCircleOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Guide',
+            key: 'guide',
         },
         {
             label: <Text style={{ fontSize: 16, marginRight: 6 }}>Feedback</Text>,
             icon: <ExclamationCircleOutlined style={{ fontSize: 20, marginRight: 20, marginLeft: 6 }} />,
-            key: 'Feedback',
-        }
+            key: 'feedback',
+        },
     ];
 
     const selectItem = (e) => {
         switch (e.key) {
-            case '9999':
+            case 'logout':
                 signOut();
                 break;
-            case '0':
+            case 'management':
+                navigate('/user/' + props.user.email + '/personal-info');
+                break;
+            case 'profile':
+                navigate('/comingsoon');
+                break;
+            case 'setting':
+                navigate('/comingsoon');
+                break;
+            case 'guide':
+                navigate('/comingsoon');
+                break;
+            case 'feedback':
+                navigate('/comingsoon');
                 break;
         }
     };
 
     const signOut = () => {
         Auth.signOut().then((r) => {
+            localStorage.removeItem('connectedUser');
             props.setUser(null);
         });
     };

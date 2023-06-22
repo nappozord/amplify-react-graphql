@@ -1,4 +1,4 @@
-import {BellOutlined} from '@ant-design/icons';
+import { BellOutlined } from '@ant-design/icons';
 import { Badge, Button, Dropdown, Space, Tooltip, Typography } from 'antd';
 import React, { useState } from 'react';
 const { Text } = Typography;
@@ -68,12 +68,7 @@ export default function HeaderNotification(props) {
                 }}
             >
                 <Badge count={notifQty} overflowCount={9}>
-                    <Button
-                        shape={'circle'}
-                        icon={<BellOutlined />}
-                        type={'primary'}
-                        onClick={() => setNotifQty(0)}
-                    />
+                    <Button shape={'circle'} icon={<BellOutlined />} type={'primary'} onClick={() => setNotifQty(0)} />
                 </Badge>
             </Dropdown>
         </Tooltip>

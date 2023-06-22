@@ -1,20 +1,21 @@
-import {API} from "aws-amplify";
+import { API } from 'aws-amplify';
 
 const apiName = 'listupAPI';
 const myInit = {
     response: true,
-}
+};
 
 export async function getUser(email) {
     const path = '/user/' + email;
 
     return API.get(apiName, path, myInit)
         .then((response) => {
-            console.log('got response', response)
-            return response
+            console.log('got response', response);
+            localStorage.setItem('connectedUser', JSON.stringify(response.data));
+            return response;
         })
         .catch((error) => {
-            console.log('got error', error)
-            return error
-        })
+            console.log('got error', error);
+            return error;
+        });
 }

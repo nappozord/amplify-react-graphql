@@ -2,7 +2,7 @@ import { Alert, Button, Divider, Form, Input } from 'antd';
 import { GoogleOutlined, LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
-import FederatedSignIn from "../../../components/layout/authentication/FederatedSignIn";
+import FederatedSignIn from '../../../components/authentication/FederatedSignIn';
 
 export default function SignUp(props) {
     const [email, setEmail] = useState();
@@ -67,7 +67,7 @@ export default function SignUp(props) {
     return (
         <div>
             <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off" onFinish={onSignUp}>
-                <FederatedSignIn text={"Registrati con Google"} />
+                <FederatedSignIn text={'Registrati con Google'} />
                 <Form.Item>
                     <Divider style={{ marginTop: -16 }} />
                 </Form.Item>
