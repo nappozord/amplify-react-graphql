@@ -19,7 +19,7 @@
       "function": {
         "listupGetUser": {
           "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
-          "s3Key": "amplify-builds/listupGetUser-414c6d694d7666534e46-build.zip"
+          "s3Key": "amplify-builds/listupGetUser-3059422b78676f303538-build.zip"
         }
       },
       "api": {

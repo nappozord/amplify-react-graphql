@@ -10,4 +10,4 @@ src = {editable = true, path = "./src"}
 pymysql = "*"
 
 [requires]
-python_version = "3.9.5"
+python_version = "3.8"
