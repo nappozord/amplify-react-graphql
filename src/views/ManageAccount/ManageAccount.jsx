@@ -1,6 +1,7 @@
 import { Card } from 'antd';
 import React, { useState } from 'react';
-import ComingSoon from "../Errors/ComingSoon";
+import ComingSoon from '../Errors/ComingSoon';
+import UserPersonalInfo from '../../components/manageAccount/UserPersonalInfo';
 
 const tabListNoTitle = [
     {
@@ -21,15 +22,15 @@ const tabListNoTitle = [
     },
 ];
 
-const items = {
-    account: (<ComingSoon />),
-    notification: (<ComingSoon />),
-    privacy: (<ComingSoon />),
-    advanced: (<ComingSoon />),
-};
-
 export default function ManageAccount(props) {
     const [activeTabKey, setActiveTabKey] = useState('account');
+
+    const items = {
+        account: <UserPersonalInfo user={props.user} setUser={props.setUser} />,
+        notification: <ComingSoon />,
+        privacy: <ComingSoon />,
+        advanced: <ComingSoon />,
+    };
 
     const onChange = (key) => {
         setActiveTabKey(key);

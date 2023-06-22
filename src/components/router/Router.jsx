@@ -8,7 +8,7 @@ import HomePage from '../../views/HomePage/HomePage';
 import ManageAccount from '../../views/ManageAccount/ManageAccount';
 import Error404 from '../../views/Errors/Error404';
 import './Router.css';
-import ComingSoon from "../../views/Errors/ComingSoon";
+import ComingSoon from '../../views/Errors/ComingSoon';
 
 export default function Router(props) {
     const { token } = theme.useToken();
@@ -43,15 +43,17 @@ export default function Router(props) {
                     path: '/',
                     element: <HomePage user={props.user} setUser={props.setUser} />,
                 },
-                {
-                    path: '/user/:email',
-                    children: [
-                        {
-                            path: 'personal-info',
-                            element: <ManageAccount user={props.user} setUser={props.setUser} />,
-                        }
-                    ]
-                },
+                props.user
+                    ? {
+                          path: '/user/:email',
+                          children: [
+                              {
+                                  path: 'personal-info',
+                                  element: <ManageAccount user={props.user} setUser={props.setUser} />,
+                              },
+                          ],
+                      }
+                    : {},
                 {
                     path: '/comingsoon',
                     element: <ComingSoon />,

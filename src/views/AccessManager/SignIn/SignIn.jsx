@@ -17,11 +17,11 @@ export default function SignIn(props) {
             setLoading(true);
             Auth.signIn(username, password)
                 .then((r) => {
-                    console.log(r);
                     getUser(r.attributes.email).then((r) => {
                         setLoading(false);
                         setError(null);
-                        props.setUser(r.data);
+                        if (r.data) props.setUser(r.data);
+                        else props.setUser(null);
                         props.setDrawer(false);
                     });
                 })

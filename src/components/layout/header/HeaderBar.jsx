@@ -36,7 +36,6 @@ export default function HeaderBar(props) {
                     width={124}
                     src={logo}
                     onClick={() => {
-                        console.log('Hello');
                         navigate('/');
                     }}
                 />

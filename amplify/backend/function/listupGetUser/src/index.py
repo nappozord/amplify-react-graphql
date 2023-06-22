@@ -59,30 +59,58 @@ def handler(event, context):
     """
 
     email = event['pathParameters']['email']
+    method = event['httpMethod']
+
+    response = {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE,PATCH",
+            "Access-Control-Allow-Credentials": True,
+            "Access-Control-Allow-Origin": "*",
+            "X-Requested-With": "*"
+        },
+        "body": json.dumps({"message": "Success"}),
+        "isBase64Encoded": False,
+    }
 
     with conn.cursor() as cur:
-        sql_string = f"select * from users where email = '{email}'"
-        cur.execute(sql_string)
+        if method == 'GET':
+            sql_string = f"select * from users where email = '{email}'"
+            cur.execute(sql_string)
+            dataset = cur.fetchone()
+            print(dataset)
+            response['body'] = json.dumps(dataset)
 
-        dataset = cur.fetchone()
-
-        print(dataset)
-
-        response = {
-            "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE,PATCH",
-                "Access-Control-Allow-Credentials": True,
-                "Access-Control-Allow-Origin": "*",
-                "X-Requested-With": "*"
-            },
-            "body": json.dumps(dataset),
-            "isBase64Encoded": False,
-        };
-
-        # dataset[0]
+        elif method == 'POST':
+            user = json.loads(event['body'])
+            username = user['username']
+            given_name = user['given_name']
+            family_name = user['family_name']
+            picture = user['picture']
+            phone = user['phone']
+            birth_date = user['birth_date']
+            gender = user['gender']
+            sql_string = f"update users " \
+                         f"set username = '{username}'," \
+                         f"given_name = '{given_name}'," \
+                         f"family_name = '{family_name}'," \
+                         f"picture = '{picture}'," \
+                         f"phone = '{phone}'," \
+                         f"birth_date = '{birth_date}'," \
+                         f"gender = '{gender}'" \
+                         f" where email = '{email}'"
+            cur.execute(sql_string)
+            conn.commit()
+            dataset = cur.fetchone()
+            print(dataset)
+            sql_string = f"select * from users where email = '{email}'"
+            cur.execute(sql_string)
+            dataset = cur.fetchone()
+            print(dataset)
+            response['body'] = json.dumps(dataset)
+            #response['body'] = json.dumps(event)
 
         print(event)
 

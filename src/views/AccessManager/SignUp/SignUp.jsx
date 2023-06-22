@@ -48,7 +48,6 @@ export default function SignUp(props) {
                     setLoading(false);
                     setError(null);
                     props.setVerification(true);
-                    console.log(r);
                     props.setUser({
                         username,
                         toConfirm: true,

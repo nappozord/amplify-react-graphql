@@ -1,15 +1,18 @@
-import { ConfigProvider, Layout, Spin, theme } from 'antd';
+import { ConfigProvider, Spin } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { Auth } from 'aws-amplify';
-import './App.css';
+import locale from 'antd/locale/it_IT';
 import { getUser } from './services/apiManager';
 import Router from './components/router/Router';
 
 export default function App() {
-    const { token } = theme.useToken();
     const firstUpdate = useRef(true);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        if (!firstUpdate.current) localStorage.setItem('connectedUser', JSON.stringify(user));
+    }, [user]);
 
     useEffect(() => {
         if (firstUpdate.current) {
@@ -20,7 +23,6 @@ export default function App() {
                 setLoading(false);
             } else {
                 Auth.currentUserInfo().then((r) => {
-                    console.log(r);
                     if (r)
                         getUser(r.attributes.email).then((r) => {
                             setUser(r.data);
@@ -33,7 +35,7 @@ export default function App() {
     }, []);
 
     return (
-        <ConfigProvider>
+        <ConfigProvider locale={locale}>
             <Spin spinning={loading} size="large" tip="Effettuando l'accesso...">
                 <Router user={user} setUser={setUser} />
             </Spin>

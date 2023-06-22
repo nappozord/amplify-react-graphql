@@ -30,7 +30,7 @@ export default function HeaderAvatar(props) {
                                     props.user.family_name.charAt(0).toUpperCase() +
                                     props.user.family_name.slice(1)}
                             </Text>
-                            <Text style={{ fontSize: 16 }} secondary>
+                            <Text style={{ fontSize: 16 }} strong type={'secondary'}>
                                 {'@' + props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
                             </Text>
                         </>
@@ -109,10 +109,10 @@ export default function HeaderAvatar(props) {
     };
 
     const signOut = () => {
-        Auth.signOut().then((r) => {
-            localStorage.removeItem('connectedUser');
-            props.setUser(null);
-        });
+        localStorage.removeItem('connectedUser');
+        props.setUser(null);
+        navigate('/');
+        Auth.signOut().catch((e) => console.log(e));
     };
 
     return (
