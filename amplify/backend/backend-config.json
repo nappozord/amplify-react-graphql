@@ -1,4 +1,20 @@
 {
+  "api": {
+    "listupAPI": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "listupGetUser"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "listup": {
       "customAuth": false,
@@ -25,6 +41,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "listupGetUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_listupGetUser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupGetUser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetUser"
+        }
+      ]
     }
   }
 }

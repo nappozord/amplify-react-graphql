@@ -3,6 +3,7 @@ import { GoogleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import FederatedSignIn from "../../../components/layout/authentication/FederatedSignIn";
+import {getUser} from "../../../services/apiManager";
 
 export default function SignIn(props) {
     const [username, setUsername] = useState();
@@ -16,10 +17,13 @@ export default function SignIn(props) {
             setLoading(true);
             Auth.signIn(username, password)
                 .then((r) => {
-                    setLoading(false);
-                    setError(null);
-                    props.setUser(r);
-                    props.setDrawer(false);
+                    console.log(r);
+                    getUser(r.attributes.email).then(r => {
+                        setLoading(false);
+                        setError(null);
+                        props.setUser(r.data);
+                        props.setDrawer(false);
+                    })
                 })
                 .catch((e) => {
                     setLoading(false);

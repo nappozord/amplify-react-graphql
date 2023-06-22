@@ -1,5 +1,5 @@
-import { NotificationOutlined } from '@ant-design/icons';
-import { Badge, Button, Card, Dropdown, Space, Tooltip, Typography } from 'antd';
+import {BellOutlined} from '@ant-design/icons';
+import { Badge, Button, Dropdown, Space, Tooltip, Typography } from 'antd';
 import React, { useState } from 'react';
 const { Text } = Typography;
 
@@ -70,7 +70,7 @@ export default function HeaderNotification(props) {
                 <Badge count={notifQty} overflowCount={9}>
                     <Button
                         shape={'circle'}
-                        icon={<NotificationOutlined />}
+                        icon={<BellOutlined />}
                         type={'primary'}
                         onClick={() => setNotifQty(0)}
                     />

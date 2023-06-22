@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/user/{email}": {
+      "name": "/user/{email}",
+      "lambdaFunction": "listupGetUser",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}

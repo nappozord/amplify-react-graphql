@@ -1,13 +1,20 @@
-const apiURL = 'https://ka96jx8to7.execute-api.eu-north-1.amazonaws.com/prod/';
+import {API} from "aws-amplify";
 
-export const getUser = (email, token) =>
-    new Promise(() => {
-        fetch(apiURL + email, {
-            method: 'GET',
-            headers: {
-                Authorization: token,
-            },
-        }).then((response) => {
-            return response.json();
-        }).catch(e => console.log(e));
-    });
+const apiName = 'listupAPI';
+const myInit = {
+    response: true,
+}
+
+export async function getUser(email) {
+    const path = '/user/' + email;
+
+    return API.get(apiName, path, myInit)
+        .then((response) => {
+            console.log('got response', response)
+            return response
+        })
+        .catch((error) => {
+            console.log('got error', error)
+            return error
+        })
+}
