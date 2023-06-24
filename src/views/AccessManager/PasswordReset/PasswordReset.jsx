@@ -1,43 +1,46 @@
 import { Alert, Button, Form, Input } from 'antd';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import {LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import ResendCode from '../../../components/authentication/ResendCode';
+import { getUser } from '@services/apiManager.jsx';
 
 export default function PasswordReset(props) {
-    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
     const [code, setCode] = useState();
-    const [loading, setLoading] = useState();
-    const [errorUsername, setErrorUsername] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [errorEmail, setErrorEmail] = useState(null);
     const [error, setError] = useState(null);
-    const [validUsername, setValidUsername] = useState(false);
+    const [validEmail, setValidEmail] = useState(false);
 
     const onFinish = () => {
-        if (!validUsername) {
+        if (!validEmail) {
             setLoading(true);
-            Auth.forgotPassword(username)
-                .then((r) => {
+            Auth.forgotPassword(email)
+                .then(() => {
                     setLoading(false);
-                    setErrorUsername(null);
-                    setValidUsername(true);
-                    props.setUser({ username, toConfirm: true });
+                    setErrorEmail(null);
+                    setValidEmail(true);
+                    props.setUserNotConfirmed({ email });
                 })
                 .catch(() => {
                     setLoading(false);
-                    setErrorUsername('Utente non registrato');
+                    setErrorEmail('Utente non registrato');
                 });
         } else {
             if (password === confirmPassword) {
                 setLoading(true);
-                Auth.forgotPasswordSubmit(username, code, password)
+                Auth.forgotPasswordSubmit(email, code, password)
                     .then((r) => {
-                        Auth.signIn(username, password).then((r) => {
+                        Auth.signIn(email, password).then((r) => {
                             setLoading(false);
                             setError(null);
-                            props.setUser(r);
-                            props.setDrawer(false);
+                            getUser(email).then(r => {
+                                props.setUser(r.data);
+                                props.setDrawer(false);
+                            })
                         });
                     })
                     .catch(() => {
@@ -53,31 +56,31 @@ export default function PasswordReset(props) {
     return (
         <div>
             <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off" onFinish={onFinish}>
-                {!validUsername ? (
+                {!validEmail ? (
                     <Form.Item>
                         <Alert message={'Inserisci il tuo nome utente.'} type="info" />
                     </Form.Item>
                 ) : null}
-                <Form.Item label="Username" style={!validUsername ? { marginTop: -16 } : null}>
+                <Form.Item label="Email" style={!validEmail ? { marginTop: -16 } : null}>
                     <Input
-                        prefix={<UserOutlined />}
-                        placeholder="Username"
+                        prefix={<MailOutlined />}
+                        placeholder="Email"
                         size="large"
                         onChange={(e) => {
-                            setUsername(e.target.value);
+                            setEmail(e.target.value);
                         }}
-                        disabled={validUsername}
+                        disabled={validEmail}
                     />
                 </Form.Item>
-                {errorUsername ? (
-                    <Alert message={errorUsername} type="error" style={{ marginBottom: 16 }} showIcon />
+                {errorEmail ? (
+                    <Alert message={errorEmail} type="error" style={{ marginBottom: 16 }} showIcon />
                 ) : null}
-                {validUsername ? (
+                {validEmail ? (
                     <>
                         <Form.Item style={{ marginTop: -8 }}>
                             <Alert
                                 message={
-                                    'Controlla la tua mail, ti abbiamo mandato un codice di verifica da inserire qui sotto.'
+                                    'Controlla la tua email, ti abbiamo mandato un codice di verifica da inserire qui sotto.'
                                 }
                                 type="info"
                             />
@@ -120,7 +123,7 @@ export default function PasswordReset(props) {
                         Conferma
                     </Button>
                 </Form.Item>
-                {validUsername ? <ResendCode username={username} forgotPassword={true} /> : null}
+                {validEmail ? <ResendCode email={email} forgotPassword={true} /> : null}
             </Form>
         </div>
     );

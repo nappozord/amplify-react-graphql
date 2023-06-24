@@ -1,5 +1,5 @@
 import { Alert, Button, Divider, Form, Input } from 'antd';
-import { GoogleOutlined, LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined, MailOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import FederatedSignIn from '../../../components/authentication/FederatedSignIn';
@@ -9,11 +9,11 @@ export default function SignUp(props) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
     const [confirmPassword, setConfirmPassword] = useState();
-    const [loading, setLoading] = useState();
-    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
 
     const validateData = () => {
-        if (!username || !password || !confirmPassword || !email) {
+        if (/*!username ||*/ !password || !confirmPassword || !email) {
             setError('Inserisci tutti i campi');
             return false;
         }
@@ -35,11 +35,8 @@ export default function SignUp(props) {
         if (validateData()) {
             setLoading(true);
             Auth.signUp({
-                username,
+                username: email,
                 password,
-                attributes: {
-                    email,
-                },
                 autoSignIn: {
                     enabled: true,
                 },
@@ -48,12 +45,9 @@ export default function SignUp(props) {
                     setLoading(false);
                     setError(null);
                     props.setVerification(true);
-                    props.setUser({
-                        username,
-                        toConfirm: true,
-                        attributes: {
-                            email,
-                        },
+                    props.setUserNotConfirmed({
+                        //username,
+                        email,
                     });
                 })
                 .catch(() => {
@@ -70,7 +64,7 @@ export default function SignUp(props) {
                 <Form.Item>
                     <Divider style={{ marginTop: -16 }} />
                 </Form.Item>
-                <Form.Item label="Email" style={{ marginTop: -40 }}>
+                <Form.Item label="Email" style={{ marginTop: -46 }}>
                     <Input
                         prefix={<MailOutlined />}
                         placeholder="Email"
@@ -80,7 +74,7 @@ export default function SignUp(props) {
                         }}
                     />
                 </Form.Item>
-                <Form.Item label="Username" style={{ marginTop: -16 }}>
+                {/*<Form.Item label="Username" style={{ marginTop: -16 }}>
                     <Input
                         prefix={<UserOutlined />}
                         placeholder="Username"
@@ -89,7 +83,7 @@ export default function SignUp(props) {
                             setUsername(e.target.value);
                         }}
                     />
-                </Form.Item>
+                </Form.Item>*/}
                 <Form.Item style={{ marginTop: -16 }} label="Password">
                     <Input.Password
                         prefix={<LockOutlined />}

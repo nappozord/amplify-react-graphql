@@ -32,7 +32,7 @@ export default function HeaderBar(props) {
             }}
         >
             <div style={{ position: 'absolute' }}>
-                {props.user && !props.user.toConfirm ? <HeaderSideMenu user={props.user} /> : null}
+                {props.user ? <HeaderSideMenu user={props.user} /> : null}
                 <a>
                     <Image
                         preview={false}
@@ -45,10 +45,10 @@ export default function HeaderBar(props) {
                 </a>
             </div>
             <HeaderSearch />
-            {!props.user || props.user.toConfirm ? (
+            {!props.user ? (
                 <div style={{ right: 40, position: 'absolute' }}>
                     <div style={{ marginTop: 4 }}>
-                        <Button size="large" type="primary" icon={<LoginOutlined />} onClick={() => setDrawer(!drawer)}>
+                        <Button size="large" type="primary" icon={<LoginOutlined />} onClick={() => setDrawer(true)}>
                             <span className="menu-label">Accedi</span>
                         </Button>
                     </div>

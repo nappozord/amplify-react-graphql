@@ -7,7 +7,7 @@ export default function ResendCode(props) {
 
     const resendCode = () => {
         if (props.forgotPassword) {
-            Auth.forgotPassword(props.username)
+            Auth.forgotPassword(props.email)
                 .then(() => {
                     setCodeResent(1);
                 })
@@ -15,7 +15,7 @@ export default function ResendCode(props) {
                     setCodeResent(2);
                 });
         } else {
-            Auth.resendSignUp(props.username)
+            Auth.resendSignUp(props.email)
                 .then(() => {
                     setCodeResent(1);
                 })

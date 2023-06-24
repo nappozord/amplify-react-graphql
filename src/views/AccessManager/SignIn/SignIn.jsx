@@ -1,14 +1,14 @@
 import { Alert, Button, Divider, Form, Input } from 'antd';
-import { GoogleOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
+import {GoogleOutlined, LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import FederatedSignIn from '../../../components/authentication/FederatedSignIn';
-import { getUser } from '../../../services/apiManager';
+import { getUser } from '@services/apiManager.jsx';
 
 export default function SignIn(props) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const onSignIn = () => {
@@ -31,7 +31,7 @@ export default function SignIn(props) {
                         props.setVerification(true);
                         props.setUser({ username });
                     } else {
-                        setError('Username o password errati');
+                        setError('Email o password errati');
                     }
                 });
         }
@@ -44,10 +44,10 @@ export default function SignIn(props) {
                 <Form.Item>
                     <Divider style={{ marginTop: -16 }} />
                 </Form.Item>
-                <Form.Item label="Username" style={{ marginTop: -40 }}>
+                <Form.Item label="Email" style={{ marginTop: -46 }}>
                     <Input
-                        prefix={<UserOutlined />}
-                        placeholder="Username"
+                        prefix={<MailOutlined />}
+                        placeholder="Email"
                         size="large"
                         onChange={(e) => {
                             setUsername(e.target.value);
@@ -71,7 +71,7 @@ export default function SignIn(props) {
                     </Button>
                 </Form.Item>
                 <Form.Item style={{ textAlign: 'center' }}>
-                    <Button type="link" htmlType="button" onClick={() => props.setReset(true)}>
+                    <Button type="link" onClick={() => props.setReset(true)}>
                         Password dimenticata?
                     </Button>
                 </Form.Item>

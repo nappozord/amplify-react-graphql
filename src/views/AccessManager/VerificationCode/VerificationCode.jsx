@@ -3,25 +3,23 @@ import { GoogleOutlined, HolderOutlined, LockOutlined, UserOutlined } from '@ant
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import ResendCode from '../../../components/authentication/ResendCode';
+import {getUser, postUser} from "@services/apiManager.jsx";
 
 export default function VerificationCode(props) {
     const [code, setCode] = useState();
-    const [loading, setLoading] = useState();
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const onVerification = () => {
         if (!code) setError('Codice non valido');
         else {
             setLoading(true);
-            Auth.confirmSignUp(props.user.username, code)
+            Auth.confirmSignUp(props.user.email, code)
                 .then(() => {
                     setError(false);
                     setLoading(false);
                     props.setDrawer(false);
-                    props.setUser({
-                        ...props.user,
-                        toConfirm: false,
-                    });
+                    props.setUser(props.user);
                 })
                 .catch(() => {
                     setLoading(false);
@@ -32,7 +30,7 @@ export default function VerificationCode(props) {
 
     return (
         <div>
-            <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off">
+            <Form layout="vertical" style={{ maxWidth: 600 }} autoComplete="off" onFinish={onVerification}>
                 <Form.Item>
                     <Alert
                         message={
@@ -59,13 +57,14 @@ export default function VerificationCode(props) {
                         onClick={onVerification}
                         type="primary"
                         size="large"
+                        htmlType="button"
                         style={{ width: '100%' }}
                         loading={loading}
                     >
                         Conferma Codice
                     </Button>
                 </Form.Item>
-                <ResendCode username={props.user.username} />
+                <ResendCode email={props.user.email} />
             </Form>
         </div>
     );

@@ -4,6 +4,7 @@ import pymysql
 import json
 import random
 import boto3
+import datetime
 from botocore.exceptions import ClientError
 
 secret_name = "listup/MySQL"
@@ -54,6 +55,7 @@ logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 
 def handler(event, context):
     print(event)
+    datetime_format = '%Y-%m-%d %H:%M:%S'
     """
     This function creates a new RDS database table and writes records to it
     """
@@ -80,6 +82,10 @@ def handler(event, context):
             sql_string = f"select * from users where email = '{email}'"
             cur.execute(sql_string)
             dataset = cur.fetchone()
+            dataset['last_updated_date'] = dataset['last_updated_date'].strftime(datetime_format)
+            dataset['created_date'] = dataset['created_date'].strftime(datetime_format)
+            if dataset['birth_date'] is not None:
+                dataset['birth_date'] = dataset['birth_date'].strftime(datetime_format)
             print(dataset)
             response['body'] = json.dumps(dataset)
 
@@ -98,7 +104,7 @@ def handler(event, context):
                          f"family_name = '{family_name}'," \
                          f"picture = '{picture}'," \
                          f"phone = '{phone}'," \
-                         f"birth_date = '{birth_date}'," \
+                         f"birth_date = '{datetime.datetime.strptime(birth_date, datetime_format)}'," \
                          f"gender = '{gender}'" \
                          f" where email = '{email}'"
             cur.execute(sql_string)

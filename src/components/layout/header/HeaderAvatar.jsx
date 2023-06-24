@@ -35,8 +35,14 @@ export default function HeaderAvatar(props) {
                             </Text>
                         </>
                     ) : (
-                        <Text strong style={{ fontSize: 20 }}>
+                        props.user.username ? (<>
+                            <Text strong style={{ fontSize: 20 }}>
                             {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                        </Text>
+                            <Text style={{ fontSize: 16 }} strong type={'secondary'}>
+                                {props.user.email}
+                            </Text></>) : <Text strong style={{ fontSize: 20 }}>
+                            {props.user.email}
                         </Text>
                     )}
                 </Space>
@@ -121,14 +127,14 @@ export default function HeaderAvatar(props) {
                 <Avatar
                     src={props.user.picture}
                     style={{
-                        backgroundColor: getColor(props.user.username),
+                        backgroundColor: getColor(props.user.email),
                         marginRight: 8,
                         marginLeft: 16,
                         marginTop: -6,
                     }}
                     size="large"
                 >
-                    {props.user.username.charAt(0).toUpperCase()}
+                    {props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}
                 </Avatar>
             </Dropdown>
         </a>

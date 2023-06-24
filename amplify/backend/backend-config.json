@@ -34,7 +34,9 @@
         "socialProviders": [
           "GOOGLE"
         ],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
@@ -45,6 +47,11 @@
   },
   "function": {
     "listupGetUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "listupPostAuthentication": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -64,6 +71,22 @@
         {
           "category": "function",
           "resourceName": "listupGetUser"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupPostAuthentication_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupPostAuthentication"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupPostAuthentication_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupPostAuthentication"
         }
       ]
     }

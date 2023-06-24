@@ -9,6 +9,7 @@ import PasswordReset from './PasswordReset/PasswordReset';
 export default function AccessManager(props) {
     const [verification, setVerification] = useState(false);
     const [reset, setReset] = useState();
+    const [userNotConfirmed, setUserNotConfirmed] = useState();
 
     const itemsTab = [
         {
@@ -36,7 +37,7 @@ export default function AccessManager(props) {
                     Registrati
                 </div>
             ),
-            children: <SignUp setVerification={setVerification} setUser={props.setUser} />,
+            children: <SignUp setVerification={setVerification} setUserNotConfirmed={setUserNotConfirmed} />,
         },
     ];
 
@@ -59,7 +60,7 @@ export default function AccessManager(props) {
                                   ),
                                   children: (
                                       <VerificationCode
-                                          user={props.user}
+                                          user={userNotConfirmed}
                                           setDrawer={props.setDrawer}
                                           setUser={props.setUser}
                                       />
@@ -79,6 +80,7 @@ export default function AccessManager(props) {
                                   children: (
                                       <PasswordReset
                                           setDrawer={props.setDrawer}
+                                          setUserNotConfirmed={setUserNotConfirmed}
                                           setUser={props.setUser}
                                           setReset={props.setReset}
                                       />
