@@ -27,10 +27,10 @@ const { Option } = Select;
 export default function UserPersonalInfo(props) {
     const [modal, setModal] = useState();
     const [newImage, setNewImage] = useState();
-
-    console.log(props);
+    const [loading, setLoading] = useState(false);
 
     const onFinish = (values) => {
+        setLoading(true);
         let u = {
             ...props.user,
             username: values.username,
@@ -40,8 +40,14 @@ export default function UserPersonalInfo(props) {
             gender: values.gender,
             birth_date: dayjs(values.birth_date).format('YYYY-MM-DD'),
         };
-        props.setUser(u);
-        postUser(u).catch((e) => console.log(e));
+        props.openNotification('Profilo aggiornato', 'Profilo aggiornato correttamente', 'success');
+
+        postUser(u)
+            .then(() => {
+                setLoading(false);
+                props.setUser(u);
+            })
+            .catch((e) => console.log(e));
     };
 
     const prefixSelector = (
@@ -60,7 +66,7 @@ export default function UserPersonalInfo(props) {
         <div style={{ width: '100%' }}>
             <Row>
                 <Title style={{ marginTop: '0.5em' }} level={2}>
-                    Aggiorna i tuoi dati di profilo
+                    {props.user.username ? 'Aggiorna i tuoi dati di profilo' : 'Completa il tuo profilo'}
                 </Title>
             </Row>
             <Divider />
@@ -79,7 +85,12 @@ export default function UserPersonalInfo(props) {
                         onFinish={onFinish}
                         autoComplete="off"
                     >
-                        <Form.Item labelAlign={'left'} label={<Text strong>Username</Text>} name="username">
+                        <Form.Item
+                            labelAlign={'left'}
+                            label={<Text strong>Username</Text>}
+                            name="username"
+                            tooltip={!props.user.username ? 'Come vuoi farti chiamare dagli altri' : null}
+                        >
                             {props.user.username ? (
                                 <Text strong style={{ fontSize: 18 }}>
                                     {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
@@ -133,7 +144,13 @@ export default function UserPersonalInfo(props) {
                             <DatePicker format={'DD-MM-YYYY'} style={{ width: '100%' }} />
                         </Form.Item>
                         <Form.Item>
-                            <Button style={{ width: '100%' }} size={'large'} type="primary" htmlType="submit">
+                            <Button
+                                style={{ width: '100%' }}
+                                size={'large'}
+                                type="primary"
+                                htmlType="submit"
+                                loading={loading}
+                            >
                                 Aggiorna Profilo
                             </Button>
                         </Form.Item>

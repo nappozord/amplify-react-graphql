@@ -57,6 +57,7 @@ def get_user(cur, email, datetime_format):
     sql_string = f"select * from users where email = '{email}'"
     cur.execute(sql_string)
     dataset = cur.fetchone()
+    print(dataset)
     dataset['last_updated_date'] = dataset['last_updated_date'].strftime(datetime_format)
     dataset['created_date'] = dataset['created_date'].strftime(datetime_format)
     if dataset['birth_date'] is not None and dataset['birth_date'] != '0000-00-00 00:00:00':

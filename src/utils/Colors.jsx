@@ -25,7 +25,6 @@ const colors = [
 ];
 
 export default function getColor(input) {
-    console.log(input);
     let hash = 0,
         len = input.length;
     for (let i = 0; i < len; i++) {

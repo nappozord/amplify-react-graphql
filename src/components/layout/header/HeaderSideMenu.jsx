@@ -23,7 +23,7 @@ const { Text } = Typography;
 
 export default function HeaderSideMenu(props) {
     const navigate = useNavigate();
-    const [drawer, setDrawer] = useState();
+    const [drawer, setDrawer] = useState(false);
 
     const items = [
         {
@@ -199,7 +199,14 @@ export default function HeaderSideMenu(props) {
     ];
 
     const onClick = (e) => {
-        navigate('/comingsoon');
+        switch (e.key) {
+            case 'home':
+                navigate('/');
+                break;
+            default:
+                navigate('/comingsoon');
+                break;
+        }
         setDrawer(false);
     };
 

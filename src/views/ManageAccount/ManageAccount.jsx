@@ -26,7 +26,9 @@ export default function ManageAccount(props) {
     const [activeTabKey, setActiveTabKey] = useState('account');
 
     const items = {
-        account: <UserPersonalInfo user={props.user} setUser={props.setUser} />,
+        account: (
+            <UserPersonalInfo user={props.user} setUser={props.setUser} openNotification={props.openNotification} />
+        ),
         notification: <ComingSoon />,
         privacy: <ComingSoon />,
         advanced: <ComingSoon />,

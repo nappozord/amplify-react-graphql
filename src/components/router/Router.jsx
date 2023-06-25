@@ -1,4 +1,4 @@
-import { Layout, theme } from 'antd';
+import { Layout, notification, theme } from 'antd';
 import HeaderBar from '../layout/header/HeaderBar';
 import { Content } from 'antd/es/layout/layout';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
@@ -9,13 +9,14 @@ import ManageAccount from '../../views/ManageAccount/ManageAccount';
 import Error404 from '../../views/Errors/Error404';
 import './Router.css';
 import ComingSoon from '../../views/Errors/ComingSoon';
+import ModalPersonalInfo from '@components/manageAccount/ModalPersonalInfo.jsx';
 
 export default function Router(props) {
     const { token } = theme.useToken();
 
     const CommonLayout = () => (
         <Layout>
-            <HeaderBar user={props.user} setUser={props.setUser} />
+            <HeaderBar user={props.user} setUser={props.setUser} openNotification={props.openNotification} />
             <Layout>
                 <Content>
                     <div style={{ backgroundColor: token.colorPrimaryBg, position: 'relative', marginTop: -64 }}>
@@ -24,6 +25,11 @@ export default function Router(props) {
                             <Outlet />
                         </div>
                         <div className="curved-mask-top" />
+                        <ModalPersonalInfo
+                            user={props.user}
+                            setUser={props.setUser}
+                            openNotification={props.openNotification}
+                        />
                     </div>
                 </Content>
             </Layout>
@@ -49,7 +55,13 @@ export default function Router(props) {
                           children: [
                               {
                                   path: 'personal-info',
-                                  element: <ManageAccount user={props.user} setUser={props.setUser} />,
+                                  element: (
+                                      <ManageAccount
+                                          user={props.user}
+                                          setUser={props.setUser}
+                                          openNotification={props.openNotification}
+                                      />
+                                  ),
                               },
                           ],
                       }

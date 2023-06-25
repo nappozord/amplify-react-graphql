@@ -63,6 +63,7 @@ export default function AccessManager(props) {
                                           user={userNotConfirmed}
                                           setDrawer={props.setDrawer}
                                           setUser={props.setUser}
+                                          openNotification={props.openNotification}
                                       />
                                   ),
                               },
@@ -83,6 +84,7 @@ export default function AccessManager(props) {
                                           setUserNotConfirmed={setUserNotConfirmed}
                                           setUser={props.setUser}
                                           setReset={props.setReset}
+                                          openNotification={props.openNotification}
                                       />
                                   ),
                               },

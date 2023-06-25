@@ -34,7 +34,7 @@ export default function HeaderAvatar(props) {
                             </Text>
                             {props.user.username ? (
                                 <Text style={{ fontSize: 16 }} strong type={'secondary'}>
-                                    {'@' + props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                                    {'@' + props.user.username}
                                 </Text>
                             ) : (
                                 <Text strong style={{ fontSize: 20 }}>

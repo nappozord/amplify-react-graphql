@@ -3,7 +3,6 @@ import { GoogleOutlined, HolderOutlined, LockOutlined, UserOutlined } from '@ant
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import ResendCode from '../../../components/authentication/ResendCode';
-import { getUser, postUser } from '@services/apiManager.jsx';
 
 export default function VerificationCode(props) {
     const [code, setCode] = useState();
@@ -20,6 +19,11 @@ export default function VerificationCode(props) {
                     setLoading(false);
                     props.setDrawer(false);
                     props.setUser(props.user);
+                    props.openNotification(
+                        'Registrazione completata!',
+                        'La tua registrazione a ListUP! è andata a buon fine',
+                        'success',
+                    );
                 })
                 .catch(() => {
                     setLoading(false);

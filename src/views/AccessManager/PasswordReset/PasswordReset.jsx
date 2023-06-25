@@ -35,11 +35,16 @@ export default function PasswordReset(props) {
                 Auth.forgotPasswordSubmit(email, code, password)
                     .then((r) => {
                         Auth.signIn(email, password).then((r) => {
-                            setLoading(false);
-                            setError(null);
                             getUser(email).then((r) => {
+                                setLoading(false);
+                                setError(null);
                                 props.setUser(r.data);
                                 props.setDrawer(false);
+                                props.openNotification(
+                                    'Aggiornamento completato!',
+                                    'La tua password è stata modificata con successo',
+                                    'success',
+                                );
                             });
                         });
                     })

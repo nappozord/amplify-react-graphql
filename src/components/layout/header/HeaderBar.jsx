@@ -54,7 +54,14 @@ export default function HeaderBar(props) {
                     </div>
                     <Drawer
                         closable={false}
-                        title={<AccessManager setDrawer={setDrawer} setUser={props.setUser} user={props.user} />}
+                        title={
+                            <AccessManager
+                                setDrawer={setDrawer}
+                                setUser={props.setUser}
+                                user={props.user}
+                                openNotification={props.openNotification}
+                            />
+                        }
                         open={drawer}
                         destroyOnClose={true}
                         onClose={() => setDrawer(!drawer)}
