@@ -17,6 +17,8 @@ const { Text } = Typography;
 export default function HeaderAvatar(props) {
     const navigate = useNavigate();
 
+    console.log(props.user.username);
+
     const items = [
         {
             label: (
@@ -30,18 +32,27 @@ export default function HeaderAvatar(props) {
                                     props.user.family_name.charAt(0).toUpperCase() +
                                     props.user.family_name.slice(1)}
                             </Text>
+                            {props.user.username ? (
+                                <Text style={{ fontSize: 16 }} strong type={'secondary'}>
+                                    {'@' + props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                                </Text>
+                            ) : (
+                                <Text strong style={{ fontSize: 20 }}>
+                                    {props.user.email}
+                                </Text>
+                            )}
+                        </>
+                    ) : props.user.username ? (
+                        <>
+                            <Text strong style={{ fontSize: 20 }}>
+                                {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                            </Text>
                             <Text style={{ fontSize: 16 }} strong type={'secondary'}>
-                                {'@' + props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
+                                {props.user.email}
                             </Text>
                         </>
                     ) : (
-                        props.user.username ? (<>
-                            <Text strong style={{ fontSize: 20 }}>
-                            {props.user.username.charAt(0).toUpperCase() + props.user.username.slice(1)}
-                        </Text>
-                            <Text style={{ fontSize: 16 }} strong type={'secondary'}>
-                                {props.user.email}
-                            </Text></>) : <Text strong style={{ fontSize: 20 }}>
+                        <Text strong style={{ fontSize: 20 }}>
                             {props.user.email}
                         </Text>
                     )}
@@ -134,7 +145,9 @@ export default function HeaderAvatar(props) {
                     }}
                     size="large"
                 >
-                    {props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}
+                    {props.user.username
+                        ? props.user.username.charAt(0).toUpperCase()
+                        : props.user.email.charAt(0).toUpperCase()}
                 </Avatar>
             </Dropdown>
         </a>

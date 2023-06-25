@@ -3,7 +3,7 @@ import { GoogleOutlined, HolderOutlined, LockOutlined, UserOutlined } from '@ant
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import ResendCode from '../../../components/authentication/ResendCode';
-import {getUser, postUser} from "@services/apiManager.jsx";
+import { getUser, postUser } from '@services/apiManager.jsx';
 
 export default function VerificationCode(props) {
     const [code, setCode] = useState();

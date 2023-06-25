@@ -28,7 +28,7 @@ export default function UserPersonalInfo(props) {
     const [modal, setModal] = useState();
     const [newImage, setNewImage] = useState();
 
-    console.log(props)
+    console.log(props);
 
     const onFinish = (values) => {
         let u = {
@@ -152,7 +152,9 @@ export default function UserPersonalInfo(props) {
                                         size={96 * 2}
                                     >
                                         <div style={{ fontSize: 50 }}>
-                                            {props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}
+                                            {props.user.username
+                                                ? props.user.username.charAt(0).toUpperCase()
+                                                : props.user.email.charAt(0).toUpperCase()}
                                         </div>
                                     </Avatar>
                                 </Badge.Ribbon>
@@ -202,7 +204,11 @@ export default function UserPersonalInfo(props) {
                         }}
                         size={96 * 2}
                     >
-                        <div style={{ fontSize: 50 }}>{props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}</div>
+                        <div style={{ fontSize: 50 }}>
+                            {props.user.username
+                                ? props.user.username.charAt(0).toUpperCase()
+                                : props.user.email.charAt(0).toUpperCase()}
+                        </div>
                     </Avatar>
                 </div>
                 <Input

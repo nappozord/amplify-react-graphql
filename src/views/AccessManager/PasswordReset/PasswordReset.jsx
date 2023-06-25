@@ -1,5 +1,5 @@
 import { Alert, Button, Form, Input } from 'antd';
-import {LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons';
+import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import React, { useState } from 'react';
 import ResendCode from '../../../components/authentication/ResendCode';
@@ -37,10 +37,10 @@ export default function PasswordReset(props) {
                         Auth.signIn(email, password).then((r) => {
                             setLoading(false);
                             setError(null);
-                            getUser(email).then(r => {
+                            getUser(email).then((r) => {
                                 props.setUser(r.data);
                                 props.setDrawer(false);
-                            })
+                            });
                         });
                     })
                     .catch(() => {
@@ -72,9 +72,7 @@ export default function PasswordReset(props) {
                         disabled={validEmail}
                     />
                 </Form.Item>
-                {errorEmail ? (
-                    <Alert message={errorEmail} type="error" style={{ marginBottom: 16 }} showIcon />
-                ) : null}
+                {errorEmail ? <Alert message={errorEmail} type="error" style={{ marginBottom: 16 }} showIcon /> : null}
                 {validEmail ? (
                     <>
                         <Form.Item style={{ marginTop: -8 }}>

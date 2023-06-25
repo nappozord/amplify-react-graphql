@@ -1,16 +1,23 @@
 import { Avatar, Button, Drawer, Image, Menu, Space, Typography } from 'antd';
 import {
-    AppstoreOutlined, BugOutlined,
-    ContainerOutlined, ExclamationCircleOutlined, FireOutlined,
+    AppstoreOutlined,
+    BugOutlined,
+    ContainerOutlined,
+    ExclamationCircleOutlined,
+    FireOutlined,
     HistoryOutlined,
     HomeOutlined,
     LikeOutlined,
     MenuOutlined,
-    ProfileOutlined, QuestionCircleOutlined, QuestionOutlined, RadarChartOutlined, SettingOutlined,
+    ProfileOutlined,
+    QuestionCircleOutlined,
+    QuestionOutlined,
+    RadarChartOutlined,
+    SettingOutlined,
 } from '@ant-design/icons';
 import React, { useState } from 'react';
 import logo from '@assets/logo.png';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const { Text } = Typography;
 

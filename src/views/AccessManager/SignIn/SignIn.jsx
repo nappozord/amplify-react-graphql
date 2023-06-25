@@ -1,5 +1,5 @@
 import { Alert, Button, Divider, Form, Input } from 'antd';
-import {GoogleOutlined, LockOutlined, MailOutlined, UserOutlined} from '@ant-design/icons';
+import { GoogleOutlined, LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import FederatedSignIn from '../../../components/authentication/FederatedSignIn';
