@@ -28,6 +28,8 @@ export default function UserPersonalInfo(props) {
     const [modal, setModal] = useState();
     const [newImage, setNewImage] = useState();
 
+    console.log(props)
+
     const onFinish = (values) => {
         let u = {
             ...props.user,
@@ -92,14 +94,14 @@ export default function UserPersonalInfo(props) {
                                 label={<Text strong>Nome</Text>}
                                 name="given_name"
                             >
-                                <Input />
+                                <Input placeholder={'Nome'} />
                             </Form.Item>
                             <Form.Item
                                 style={{ display: 'inline-block', width: 'calc(50% - 8px)', margin: '0 0 0 16px' }}
                                 label={<Text strong>Cognome</Text>}
                                 name="family_name"
                             >
-                                <Input />
+                                <Input placeholder={'Cognome'} />
                             </Form.Item>
                         </Form.Item>
                         <Form.Item
@@ -145,12 +147,12 @@ export default function UserPersonalInfo(props) {
                                     <Avatar
                                         src={props.user.picture}
                                         style={{
-                                            backgroundColor: getColor(props.user.username),
+                                            backgroundColor: getColor(props.user.email),
                                         }}
                                         size={96 * 2}
                                     >
                                         <div style={{ fontSize: 50 }}>
-                                            {props.user.username.charAt(0).toUpperCase()}
+                                            {props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}
                                         </div>
                                     </Avatar>
                                 </Badge.Ribbon>
@@ -195,12 +197,12 @@ export default function UserPersonalInfo(props) {
                     <Avatar
                         src={newImage ? newImage : props.user.picture}
                         style={{
-                            backgroundColor: getColor(props.user.username),
+                            backgroundColor: getColor(props.user.email),
                             margin: 28,
                         }}
                         size={96 * 2}
                     >
-                        <div style={{ fontSize: 50 }}>{props.user.username.charAt(0).toUpperCase()}</div>
+                        <div style={{ fontSize: 50 }}>{props.user.username ? props.user.username.charAt(0).toUpperCase() : props.user.email.charAt(0).toUpperCase()}</div>
                     </Avatar>
                 </div>
                 <Input

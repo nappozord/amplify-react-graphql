@@ -53,8 +53,18 @@ except pymysql.MySQLError as e:
 logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 
 
+def get_user(cur, email, datetime_format):
+    sql_string = f"select * from users where email = '{email}'"
+    cur.execute(sql_string)
+    dataset = cur.fetchone()
+    dataset['last_updated_date'] = dataset['last_updated_date'].strftime(datetime_format)
+    dataset['created_date'] = dataset['created_date'].strftime(datetime_format)
+    if dataset['birth_date'] is not None and dataset['birth_date'] != '0000-00-00 00:00:00':
+        dataset['birth_date'] = dataset['birth_date'].strftime(datetime_format)
+    return dataset
+
+
 def handler(event, context):
-    print(event)
     datetime_format = '%Y-%m-%d %H:%M:%S'
     """
     This function creates a new RDS database table and writes records to it
@@ -79,17 +89,10 @@ def handler(event, context):
 
     with conn.cursor() as cur:
         if method == 'GET':
-            sql_string = f"select * from users where email = '{email}'"
-            cur.execute(sql_string)
-            dataset = cur.fetchone()
-            dataset['last_updated_date'] = dataset['last_updated_date'].strftime(datetime_format)
-            dataset['created_date'] = dataset['created_date'].strftime(datetime_format)
-            if dataset['birth_date'] is not None:
-                dataset['birth_date'] = dataset['birth_date'].strftime(datetime_format)
-            print(dataset)
-            response['body'] = json.dumps(dataset)
+            response['body'] = json.dumps(get_user(cur, email, datetime_format))
 
         elif method == 'POST':
+            response["body"] = json.dumps(event)
             user = json.loads(event['body'])
             username = user['username']
             given_name = user['given_name']
@@ -97,6 +100,8 @@ def handler(event, context):
             picture = user['picture']
             phone = user['phone']
             birth_date = user['birth_date']
+            if birth_date is not None:
+                birth_date = datetime.datetime.strptime(birth_date,  '%Y-%m-%d')
             gender = user['gender']
             sql_string = f"update users " \
                          f"set username = '{username}'," \
@@ -104,19 +109,12 @@ def handler(event, context):
                          f"family_name = '{family_name}'," \
                          f"picture = '{picture}'," \
                          f"phone = '{phone}'," \
-                         f"birth_date = '{datetime.datetime.strptime(birth_date, datetime_format)}'," \
+                         f"birth_date = '{birth_date}'," \
                          f"gender = '{gender}'" \
                          f" where email = '{email}'"
             cur.execute(sql_string)
             conn.commit()
-            dataset = cur.fetchone()
-            print(dataset)
-            sql_string = f"select * from users where email = '{email}'"
-            cur.execute(sql_string)
-            dataset = cur.fetchone()
-            print(dataset)
-            response['body'] = json.dumps(dataset)
-            #response['body'] = json.dumps(event)
+            response['body'] = json.dumps(get_user(cur, email, datetime_format))
 
         print(event)
 
