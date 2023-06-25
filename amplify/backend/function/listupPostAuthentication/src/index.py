@@ -85,7 +85,7 @@ def handler(event, context):
                 cur.execute(sql_string)
             conn.commit()
         else:
-            if google == 'EXTERNAL_PROVIDER' and dataset[0]['google_connected'] == '0':
+            if google == 'EXTERNAL_PROVIDER' and dataset[0]['google_connected'] == 0:
                 given_name = user['given_name']
                 family_name = user['family_name']
                 picture = user['picture']
