@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Input, Dropdown, Button } from 'antd';
+import useMobile from '@utils/Mobile.jsx';
 
 const { Option } = Select;
 const { Search } = Input;
@@ -34,6 +35,7 @@ const items = [
 
 export default function HeaderSearch(props) {
     const [category, setCategory] = useState('Tutte le categorie');
+    const isMobile = useMobile();
 
     const dropdownCategory = (
         <Dropdown
@@ -61,7 +63,17 @@ export default function HeaderSearch(props) {
         </Dropdown>
     );
 
-    return (
+    return isMobile ? (
+        <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: 64 }}>
+            <Search
+                size="large"
+                placeholder="Inizia la ricerca!"
+                onSearch={() => {}}
+                enterButton
+                style={{ width: '100%' }}
+            />
+        </div>
+    ) : (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
             <Search
                 size="large"

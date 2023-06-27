@@ -20,6 +20,7 @@ import 'dayjs/locale/it';
 import { SaveOutlined } from '@ant-design/icons';
 import { postUser } from '../../services/apiManager';
 import 'dayjs/plugin/updateLocale';
+import useMobile from '@utils/Mobile.jsx';
 
 const { Text, Title } = Typography;
 const { Option } = Select;
@@ -28,6 +29,7 @@ export default function UserPersonalInfo(props) {
     const [modal, setModal] = useState();
     const [newImage, setNewImage] = useState();
     const [loading, setLoading] = useState(false);
+    const isMobile = useMobile();
 
     const onFinish = (values) => {
         setLoading(true);
@@ -71,7 +73,7 @@ export default function UserPersonalInfo(props) {
             </Row>
             <Divider />
             <Row gutter={50}>
-                <Col span={12}>
+                <Col span={isMobile ? 24 : 12}>
                     <Form
                         name="basic"
                         layout={'vertical'}
@@ -156,7 +158,7 @@ export default function UserPersonalInfo(props) {
                         </Form.Item>
                     </Form>
                 </Col>
-                <Col span={12}>
+                <Col span={isMobile ? 24 : 12}>
                     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
                         <Space direction={'vertical'} align={'center'} size={'large'}>
                             <a onClick={() => setModal(true)}>

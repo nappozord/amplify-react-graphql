@@ -42,7 +42,7 @@ export default function AccessManager(props) {
     ];
 
     return (
-        <div style={{ height: '90vh' }}>
+        <div>
             <Tabs
                 defaultActiveKey="1"
                 size="large"

@@ -1,12 +1,20 @@
 import './HomePage.css';
 import { Button, Card, Space, Typography } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import useMobile from '@utils/Mobile.jsx';
 const { Meta } = Card;
 const { Text } = Typography;
 
 export default function HomePage() {
+    const isMobile = useMobile();
+
     return (
-        <Space align={'center'} size={'large'} style={{ marginTop: '4em', display: 'flex', justifyContent: 'center' }}>
+        <Space
+            align={'center'}
+            size={'large'}
+            style={{ marginTop: '4em', display: 'flex', justifyContent: 'center' }}
+            direction={isMobile ? 'vertical' : 'horizontal'}
+        >
             <Card
                 hoverable
                 style={{ width: 300 }}

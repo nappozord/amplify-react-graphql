@@ -17,8 +17,6 @@ const { Text } = Typography;
 export default function HeaderAvatar(props) {
     const navigate = useNavigate();
 
-    console.log(props.user.username);
-
     const items = [
         {
             label: (

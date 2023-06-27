@@ -2,6 +2,7 @@ import { Card } from 'antd';
 import React, { useState } from 'react';
 import ComingSoon from '../Errors/ComingSoon';
 import UserPersonalInfo from '../../components/manageAccount/UserPersonalInfo';
+import useMobile from '@utils/Mobile.jsx';
 
 const tabListNoTitle = [
     {
@@ -24,6 +25,7 @@ const tabListNoTitle = [
 
 export default function ManageAccount(props) {
     const [activeTabKey, setActiveTabKey] = useState('account');
+    const isMobile = useMobile();
 
     const items = {
         account: (
@@ -40,7 +42,12 @@ export default function ManageAccount(props) {
 
     return (
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-            <Card style={{ width: '70%' }} tabList={tabListNoTitle} activeTabKey={activeTabKey} onTabChange={onChange}>
+            <Card
+                style={{ width: isMobile ? '95%' : '70%' }}
+                tabList={tabListNoTitle}
+                activeTabKey={activeTabKey}
+                onTabChange={onChange}
+            >
                 {items[activeTabKey]}
             </Card>
         </div>

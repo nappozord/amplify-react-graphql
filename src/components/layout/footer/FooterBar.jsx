@@ -10,7 +10,6 @@ export default function FooterBar() {
         <div
             style={{
                 textAlign: 'center',
-                position: 'fixed',
                 bottom: 0,
                 width: '100%',
                 backgroundColor: token.colorPrimaryBg,
