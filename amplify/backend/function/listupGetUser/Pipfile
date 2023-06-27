@@ -6,8 +6,9 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-
+src = {editable = true, path = "./src"}
 pymysql = "*"
+setuptools = "*"
 
 [requires]
 python_version = "3.8"
