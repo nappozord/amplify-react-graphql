@@ -23,7 +23,7 @@
         },
         "listupPostAuthentication": {
           "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
-          "s3Key": "amplify-builds/listupPostAuthentication-6b3469727941336a6159-build.zip"
+          "s3Key": "amplify-builds/listupPostAuthentication-7864527269645972714b-build.zip"
         }
       },
       "api": {
