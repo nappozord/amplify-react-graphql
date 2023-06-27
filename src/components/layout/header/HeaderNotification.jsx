@@ -1,6 +1,7 @@
 import { BellOutlined } from '@ant-design/icons';
 import { Badge, Button, Dropdown, Space, Tooltip, Typography } from 'antd';
 import React, { useState } from 'react';
+import useMobile from '@utils/Mobile.jsx';
 const { Text } = Typography;
 
 const notifications = [
@@ -49,13 +50,14 @@ notifications.forEach((n) => {
 export default function HeaderNotification(props) {
     const [tooltip, setTooltip] = useState();
     const [notifQty, setNotifQty] = useState(items.length);
+    const isMobile = useMobile();
 
     return (
         <Tooltip
             placement="bottom"
             title={'Notifiche'}
             mouseEnterDelay={0.1}
-            open={tooltip}
+            open={isMobile ? false : tooltip}
             onOpenChange={(value) => setTooltip(value)}
         >
             <Dropdown

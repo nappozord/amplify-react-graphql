@@ -2,11 +2,13 @@ import { RadarChartOutlined, PlusOutlined, ProfileOutlined } from '@ant-design/i
 import { Button, Dropdown, Tooltip, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useMobile from '@utils/Mobile.jsx';
 const { Text } = Typography;
 
 export default function HeaderPlus(props) {
     const navigate = useNavigate();
     const [tooltip, setTooltip] = useState();
+    const isMobile = useMobile();
 
     const items = [
         {
@@ -37,7 +39,7 @@ export default function HeaderPlus(props) {
             placement="bottom"
             title={'Crea'}
             mouseEnterDelay={0.1}
-            open={tooltip}
+            open={isMobile ? false : tooltip}
             onOpenChange={(value) => setTooltip(value)}
         >
             <Dropdown
