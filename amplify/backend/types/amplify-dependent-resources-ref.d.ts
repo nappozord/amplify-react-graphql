@@ -20,6 +20,13 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "function": {
+    "listupGetCategory": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
     "listupGetUser": {
       "Arn": "string",
       "LambdaExecutionRole": "string",

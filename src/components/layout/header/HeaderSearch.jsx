@@ -1,41 +1,28 @@
 import React, { useState } from 'react';
-import { Select, Input, Dropdown, Button } from 'antd';
+import { Input, Dropdown, Button } from 'antd';
 import useMobile from '@utils/Mobile.jsx';
 
-const { Option } = Select;
 const { Search } = Input;
-
-const selectCategory = (
-    <Select defaultValue="Tutte le categorie" style={{ backgroundColor: '#f0f0f0', minWidth: 150 }}>
-        <Option value="Tutte le categorie">Tutte le categorie</Option>
-        <Option value="Nascita">Nascita</Option>
-        <Option value="Laurea">Laurea</Option>
-        <Option value="Addio al celibato">Addio al celibato</Option>
-    </Select>
-);
-
-const items = [
-    {
-        key: 'Tutte le categorie',
-        label: 'Tutte le categorie',
-    },
-    {
-        key: 'Nascita',
-        label: 'Nascita',
-    },
-    {
-        key: 'Laurea',
-        label: 'Laurea',
-    },
-    {
-        key: 'Addio al celibato',
-        label: 'Addio al celibato',
-    },
-];
 
 export default function HeaderSearch(props) {
     const [category, setCategory] = useState('Tutte le categorie');
     const isMobile = useMobile();
+
+    let items = [
+        {
+            key: 'Tutte le categorie',
+            label: 'Tutte le categorie',
+        },
+        { type: 'divider' },
+    ];
+
+    if (props.categories)
+        props.categories.forEach((c) => {
+            items.push({
+                key: c.name_it,
+                label: c.name_it,
+            });
+        });
 
     const dropdownCategory = (
         <Dropdown

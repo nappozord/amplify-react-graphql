@@ -23,5 +23,26 @@ export async function postUser(user) {
         body: user,
     };
 
-    return API.post(apiName, path, myInit);
+    return API.post(apiName, path, myInit)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        });
+}
+
+export async function getCategory(category) {
+    const path = '/categories/' + category;
+    const myInit = {
+        response: true,
+    };
+
+    return API.get(apiName, path, myInit)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        });
 }

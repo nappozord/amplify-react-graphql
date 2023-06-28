@@ -9,6 +9,14 @@
           ],
           "category": "function",
           "resourceName": "listupGetUser"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "listupGetCategory"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -46,6 +54,11 @@
     }
   },
   "function": {
+    "listupGetCategory": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "listupGetUser": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -58,6 +71,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_listupGetCategory_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetCategory"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupGetCategory_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetCategory"
+        }
+      ]
+    },
     "AMPLIFY_function_listupGetUser_deploymentBucketName": {
       "usedBy": [
         {

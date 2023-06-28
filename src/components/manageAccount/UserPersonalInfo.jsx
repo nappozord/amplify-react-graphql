@@ -44,12 +44,10 @@ export default function UserPersonalInfo(props) {
         };
         props.openNotification('Profilo aggiornato', 'Profilo aggiornato correttamente', 'success');
 
-        postUser(u)
-            .then(() => {
-                setLoading(false);
-                props.setUser(u);
-            })
-            .catch((e) => console.log(e));
+        postUser(u).then(() => {
+            setLoading(false);
+            props.setUser(u);
+        });
     };
 
     const prefixSelector = (
@@ -204,7 +202,7 @@ export default function UserPersonalInfo(props) {
                         onClick={() => {
                             props.setUser({ ...props.user, picture: newImage });
                             props.user.picture = newImage;
-                            postUser(props.user).catch((e) => console.log(e));
+                            postUser(props.user);
                         }}
                     >
                         Salva immagine

@@ -21,7 +21,7 @@ export default function FooterBar() {
                     backgroundColor: token.colorPrimaryBg,
                 }}
             >
-                Copyright © 2023 ListUP! All rights reserved.
+                Copyright © 2023 ListUP! Tutti diritti riservati.
             </Footer>
         </div>
     );

@@ -2,13 +2,14 @@ import { ConfigProvider, notification, Spin } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import locale from 'antd/locale/it_IT';
-import { getUser } from './services/apiManager';
+import { getCategory, getUser } from './services/apiManager';
 import Router from './components/router/Router';
 
 export default function App() {
     const firstUpdate = useRef(true);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const [categories, setCategories] = useState(null);
 
     const [api, contextHolder] = notification.useNotification();
     const openNotification = (title, text, type) => {
@@ -42,6 +43,9 @@ export default function App() {
                     else setLoading(false);
                 });
             }
+            getCategory('all').then((r) => {
+                setCategories(r.data);
+            });
         }
     }, []);
 
@@ -49,7 +53,7 @@ export default function App() {
         <ConfigProvider locale={locale}>
             <Spin spinning={loading} size="large" tip="Effettuando l'accesso...">
                 {contextHolder}
-                <Router user={user} setUser={setUser} openNotification={openNotification} />
+                <Router user={user} setUser={setUser} openNotification={openNotification} categories={categories} />
             </Spin>
         </ConfigProvider>
     );

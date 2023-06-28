@@ -13,6 +13,13 @@
           "delete"
         ]
       }
+    },
+    "/categories/{category}": {
+      "name": "/categories/{category}",
+      "lambdaFunction": "listupGetCategory",
+      "permissions": {
+        "setting": "open"
+      }
     }
   }
 }

@@ -47,7 +47,7 @@ export default function HeaderBar(props) {
                     />
                 </a>
             </div>
-            <HeaderSearch />
+            <HeaderSearch categories={props.categories} />
             {!props.user ? (
                 <div style={{ right: isMobile ? 10 : 40, position: 'absolute' }}>
                     <div style={{ marginTop: 4 }}>

@@ -18,7 +18,12 @@ export default function Router(props) {
 
     const CommonLayout = () => (
         <Layout>
-            <HeaderBar user={props.user} setUser={props.setUser} openNotification={props.openNotification} />
+            <HeaderBar
+                user={props.user}
+                setUser={props.setUser}
+                openNotification={props.openNotification}
+                categories={props.categories}
+            />
             <Layout>
                 <Content>
                     <div style={{ backgroundColor: token.colorPrimaryBg, position: 'relative' }}>
@@ -34,7 +39,6 @@ export default function Router(props) {
                             >
                                 <Outlet />
                             </div>
-
                             <FooterBar />
                         </div>
                         <div className="curved-mask-top" />
@@ -59,7 +63,7 @@ export default function Router(props) {
                 },
                 {
                     path: '/',
-                    element: <HomePage user={props.user} setUser={props.setUser} />,
+                    element: <HomePage user={props.user} setUser={props.setUser} categories={props.categories} />,
                 },
                 props.user
                     ? {

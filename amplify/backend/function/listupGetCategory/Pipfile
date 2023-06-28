@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 pymysql = "*"
 setuptools = "*"
-mysql = "*"
 
 [requires]
 python_version = "3.8"
