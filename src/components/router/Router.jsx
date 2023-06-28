@@ -29,6 +29,7 @@ export default function Router(props) {
                                     paddingLeft: isMobile ? 0 : '20vw',
                                     paddingRight: isMobile ? 0 : '20vw',
                                     paddingBottom: 50,
+                                    minHeight: 'calc(100vh - 50px - 58px - 70px)',
                                 }}
                             >
                                 <Outlet />

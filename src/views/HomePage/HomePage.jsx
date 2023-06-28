@@ -12,7 +12,7 @@ export default function HomePage() {
         <Space
             align={'center'}
             size={'large'}
-            style={{ marginTop: '4em', display: 'flex', justifyContent: 'center' }}
+            style={{ paddingTop: '4em', display: 'flex', justifyContent: 'center' }}
             direction={isMobile ? 'vertical' : 'horizontal'}
         >
             <Card
