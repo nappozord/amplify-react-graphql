@@ -16,6 +16,7 @@ export default function HomePage(props) {
                 <Card
                     hoverable
                     style={{ width: 300 }}
+                    key={c.idcategories}
                     cover={<img alt="example" src={c.picture_preview} width={300} height={200} />}
                 >
                     <Meta
@@ -28,12 +29,19 @@ export default function HomePage(props) {
 
     return (
         <Space
+            direction={'vertical'}
             align={'center'}
             size={'large'}
-            style={{ paddingTop: isMobile ? '1em' : '4em', display: 'flex', justifyContent: 'center' }}
-            direction={isMobile ? 'vertical' : 'horizontal'}
+            style={{ display: 'flex', justifyContent: 'center' }}
         >
-            {items}
+            <Space
+                align={'center'}
+                size={'large'}
+                style={{ display: 'flex', justifyContent: 'center' }}
+                direction={isMobile ? 'vertical' : 'horizontal'}
+            >
+                {items}
+            </Space>
         </Space>
     );
 }

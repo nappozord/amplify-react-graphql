@@ -18,7 +18,7 @@ import getColor from '../../utils/Colors';
 import dayjs from 'dayjs';
 import 'dayjs/locale/it';
 import { SaveOutlined } from '@ant-design/icons';
-import { postUser } from '../../services/apiManager';
+import { postUser } from '@services/apiManager.jsx';
 import 'dayjs/plugin/updateLocale';
 import useMobile from '@utils/Mobile.jsx';
 

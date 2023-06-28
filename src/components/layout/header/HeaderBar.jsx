@@ -86,7 +86,7 @@ export default function HeaderBar(props) {
                 </div>
             ) : (
                 <div style={{ right: isMobile ? 10 : 40, position: 'absolute' }}>
-                    <HeaderPlus user={props.user} />
+                    <HeaderPlus user={props.user} categories={props.categories} />
                     <HeaderNotification user={props.user} />
                     <HeaderAvatar user={props.user} setUser={props.setUser} />
                 </div>

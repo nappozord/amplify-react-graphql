@@ -46,3 +46,18 @@ export async function getCategory(category) {
             return error;
         });
 }
+
+export async function postList(list) {
+    const path = '/list';
+    const myInit = {
+        body: list,
+    };
+
+    return API.post(apiName, path, myInit)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        });
+}

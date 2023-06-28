@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Modal } from 'antd';
 import UserPersonalInfo from '@components/manageAccount/UserPersonalInfo.jsx';
+import useMobile from '@utils/Mobile.jsx';
 
 export default function ModalPersonalInfo(props) {
     const [open, setOpen] = useState(() => props.user && !props.user.username);
+    const isMobile = useMobile();
 
     return (
         <Modal

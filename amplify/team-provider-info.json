@@ -23,11 +23,15 @@
         },
         "listupPostAuthentication": {
           "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
-          "s3Key": "amplify-builds/listupPostAuthentication-7864527269645972714b-build.zip"
+          "s3Key": "amplify-builds/listupPostAuthentication-4a30573152596e474353-build.zip"
         },
         "listupGetCategory": {
           "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
           "s3Key": "amplify-builds/listupGetCategory-4f6a314369693933746f-build.zip"
+        },
+        "listupGetList": {
+          "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
+          "s3Key": "amplify-builds/listupGetList-765a45666475354f4347-build.zip"
         }
       },
       "api": {

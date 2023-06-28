@@ -3,11 +3,13 @@ import { Button, Dropdown, Tooltip, Typography } from 'antd';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useMobile from '@utils/Mobile.jsx';
+import NewList from '@components/list/NewList.jsx';
 const { Text } = Typography;
 
 export default function HeaderPlus(props) {
     const navigate = useNavigate();
-    const [tooltip, setTooltip] = useState();
+    const [tooltip, setTooltip] = useState(false);
+    const [openNew, setOpenNew] = useState(false);
     const isMobile = useMobile();
 
     const items = [
@@ -26,7 +28,7 @@ export default function HeaderPlus(props) {
     const selectItem = (e) => {
         switch (e.key) {
             case 'new':
-                navigate('/comingsoon');
+                setOpenNew(true);
                 break;
             case 'trend':
                 navigate('/comingsoon');
@@ -35,23 +37,26 @@ export default function HeaderPlus(props) {
     };
 
     return (
-        <Tooltip
-            placement="bottom"
-            title={'Crea'}
-            mouseEnterDelay={0.1}
-            open={isMobile ? false : tooltip}
-            onOpenChange={(value) => setTooltip(value)}
-        >
-            <Dropdown
-                placement={'bottomRight'}
-                menu={{ items, onClick: selectItem }}
-                trigger={['click']}
-                onOpenChange={() => {
-                    if (tooltip) setTooltip(false);
-                }}
+        <>
+            <Tooltip
+                placement="bottom"
+                title={'Crea'}
+                mouseEnterDelay={0.1}
+                open={isMobile ? false : tooltip}
+                onOpenChange={(value) => setTooltip(value)}
             >
-                <Button shape={'circle'} icon={<PlusOutlined />} style={{ marginRight: 16 }} type={'primary'} />
-            </Dropdown>
-        </Tooltip>
+                <Dropdown
+                    placement={'bottomRight'}
+                    menu={{ items, onClick: selectItem }}
+                    trigger={['click']}
+                    onOpenChange={() => {
+                        if (tooltip) setTooltip(false);
+                    }}
+                >
+                    <Button shape={'circle'} icon={<PlusOutlined />} style={{ marginRight: 16 }} type={'primary'} />
+                </Dropdown>
+            </Tooltip>
+            <NewList open={openNew} setOpen={setOpenNew} user={props.user} categories={props.categories} />
+        </>
     );
 }

@@ -4,6 +4,7 @@ import pymysql
 import json
 import random
 import boto3
+import datetime
 from botocore.exceptions import ClientError
 
 secret_name = "listup/MySQL"
@@ -53,47 +54,46 @@ logger.info("SUCCESS: Connection to RDS MySQL instance succeeded")
 
 
 def handler(event, context):
-    print(event)
+    datetime_format = '%Y-%m-%d %H:%M:%S'
     """
     This function creates a new RDS database table and writes records to it
     """
-    user = event['request']['userAttributes']
-    email = user["email"]
-    google = user["cognito:user_status"]
 
-    print(event['request'])
+    method = event['httpMethod']
+
+    response = {
+        "statusCode": 200,
+        "headers": {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET,PUT,DELETE,PATCH",
+            "Access-Control-Allow-Credentials": True,
+            "Access-Control-Allow-Origin": "*",
+            "X-Requested-With": "*"
+        },
+        "body": json.dumps({"message": "Success"}),
+        "isBase64Encoded": False,
+    }
 
     with conn.cursor() as cur:
-        sql_string = f"select email, google_connected from users where email = '{email}'"
-        cur.execute(sql_string)
-
-        dataset = cur.fetchall()
-
-        print(dataset)
-        print(len(dataset))
-
-        if len(dataset) == 0:
-            if google == 'EXTERNAL_PROVIDER':
-                username = user['nickname']
-                given_name = user['given_name']
-                family_name = user['family_name']
-                picture = user['picture']
-                sql_string = f"insert into users (email, username, given_name, family_name, picture, google_connected) " \
-                             f"values('{email}', '{username}', '{given_name}', '{family_name}', '{picture}', 1)"
-                cur.execute(sql_string)
-            else:
-                sql_string = f"insert into users (email, google_connected) values('{email}', 0)"
-                cur.execute(sql_string)
+        if method == 'POST':
+            print(event['body'])
+            list = json.loads(event['body'])
+            iduser = list['idusers']
+            idcategory = list['idcategory']
+            name = list['name']
+            picture = list['picture']
+            description = list['description']
+            sql_string = f"insert into lists " \
+                         f"(iduser, idcategory, name, picture, description)" \
+                         f" values('{iduser}','{idcategory}'," \
+                         f"'{name}'," \
+                         f"'{picture}'," \
+                         f"'{description}'" \
+                         f")"
+            cur.execute(sql_string)
             conn.commit()
-        else:
-            if google == 'EXTERNAL_PROVIDER' and dataset[0]['google_connected'] == 0:
-                given_name = user['given_name']
-                family_name = user['family_name']
-                picture = user['picture']
-                sql_string = f"update users set given_name = '{given_name}', family_name = '{family_name}', picture = '{picture}', google_connected = 1 where email = '{email}'"
-                cur.execute(sql_string)
-                conn.commit()
 
         print(event)
 
-        return event
+        return response
