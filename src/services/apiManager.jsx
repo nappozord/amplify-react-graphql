@@ -32,7 +32,7 @@ export async function postUser(user) {
         });
 }
 
-export async function getCategory(category) {
+export async function getCategories(category) {
     const path = '/categories/' + category;
     const myInit = {
         response: true,
@@ -47,13 +47,28 @@ export async function getCategory(category) {
         });
 }
 
-export async function postList(list) {
-    const path = '/list';
+export async function postList(user, list) {
+    const path = '/user/' + user.email + '/list';
     const myInit = {
         body: list,
     };
 
     return API.post(apiName, path, myInit)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            return error;
+        });
+}
+
+export async function getAllLists(user) {
+    const path = '/user/' + user.email + '/list';
+    const myInit = {
+        response: true,
+    };
+
+    return API.get(apiName, path, myInit)
         .then((response) => {
             return response;
         })

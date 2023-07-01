@@ -1,5 +1,5 @@
 import './HomePage.css';
-import { Button, Card, Space, Typography } from 'antd';
+import { Button, Card, Skeleton, Space, Typography } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import useMobile from '@utils/Mobile.jsx';
 const { Meta } = Card;
@@ -26,6 +26,18 @@ export default function HomePage(props) {
                 </Card>,
             );
         });
+    else
+        for (let i = 0; i < 3; ++i)
+            items.push(
+                <Card
+                    hoverable
+                    style={{ width: 300 }}
+                    key={i}
+                    cover={<Skeleton.Image loading={true} active={true} style={{ width: 300, height: 200 }} />}
+                >
+                    <Skeleton.Input loading={true} active={true} block={true} size={'small'} />
+                </Card>,
+            );
 
     return (
         <Space

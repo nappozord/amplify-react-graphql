@@ -25,17 +25,17 @@ export default function HeaderBar(props) {
             style={{
                 position: 'sticky',
                 top: 0,
-                zIndex: 1,
+                zIndex: 10,
                 width: '100%',
                 display: 'flex',
                 backgroundColor: token.colorPrimaryBg,
-                height: isMobile ? 110 : 58,
+                height: isMobile ? 110 : 68,
                 paddingLeft: isMobile ? 10 : 40,
                 paddingRight: isMobile ? 10 : 40,
             }}
         >
             <div style={{ position: 'absolute' }}>
-                {props.user ? <HeaderSideMenu user={props.user} /> : null}
+                {props.user ? <HeaderSideMenu user={props.user} lists={props.lists} /> : null}
                 <a>
                     <Image
                         preview={false}
@@ -86,7 +86,13 @@ export default function HeaderBar(props) {
                 </div>
             ) : (
                 <div style={{ right: isMobile ? 10 : 40, position: 'absolute' }}>
-                    <HeaderPlus user={props.user} categories={props.categories} />
+                    <HeaderPlus
+                        user={props.user}
+                        categories={props.categories}
+                        openNotification={props.openNotification}
+                        lists={props.lists}
+                        setLists={props.setLists}
+                    />
                     <HeaderNotification user={props.user} />
                     <HeaderAvatar user={props.user} setUser={props.setUser} />
                 </div>

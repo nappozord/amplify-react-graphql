@@ -56,7 +56,15 @@ export default function HeaderPlus(props) {
                     <Button shape={'circle'} icon={<PlusOutlined />} style={{ marginRight: 16 }} type={'primary'} />
                 </Dropdown>
             </Tooltip>
-            <NewList open={openNew} setOpen={setOpenNew} user={props.user} categories={props.categories} />
+            <NewList
+                open={openNew}
+                setOpen={setOpenNew}
+                user={props.user}
+                categories={props.categories}
+                openNotification={props.openNotification}
+                lists={props.lists}
+                setLists={props.setLists}
+            />
         </>
     );
 }

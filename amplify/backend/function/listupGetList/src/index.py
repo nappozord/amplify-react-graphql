@@ -59,6 +59,7 @@ def handler(event, context):
     This function creates a new RDS database table and writes records to it
     """
 
+    email = event['pathParameters']['email']
     method = event['httpMethod']
 
     response = {
@@ -76,6 +77,15 @@ def handler(event, context):
     }
 
     with conn.cursor() as cur:
+        if method == 'GET':
+            sql_string = f"select l.idlists, l.idcategory, l.created_date, l.name, l.description, l.picture " \
+                         f"from lists l, users u where l.iduser = u. idusers and u.email = '{email}'"
+            cur.execute(sql_string)
+            dataset = cur.fetchall()
+            for set in dataset:
+                set['created_date'] = set['created_date'].strftime(datetime_format)
+            print(dataset)
+            response['body'] = json.dumps(dataset)
         if method == 'POST':
             print(event['body'])
             list = json.loads(event['body'])

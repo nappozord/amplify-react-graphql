@@ -21,8 +21,8 @@
         "setting": "open"
       }
     },
-    "/list": {
-      "name": "/list",
+    "/user/{email}/list": {
+      "name": "/user/{email}/list",
       "lambdaFunction": "listupGetList",
       "permissions": {
         "setting": "private",

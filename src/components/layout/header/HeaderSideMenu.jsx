@@ -203,6 +203,9 @@ export default function HeaderSideMenu(props) {
             case 'home':
                 navigate('/');
                 break;
+            case 'lists':
+                navigate('/user/' + props.user.email + '/lists');
+                break;
             default:
                 navigate('/comingsoon');
                 break;

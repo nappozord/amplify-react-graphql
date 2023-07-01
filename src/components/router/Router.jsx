@@ -11,6 +11,7 @@ import './Router.css';
 import ComingSoon from '../../views/Errors/ComingSoon';
 import ModalPersonalInfo from '@components/manageAccount/ModalPersonalInfo.jsx';
 import useMobile from '@utils/Mobile.jsx';
+import UserLists from '@views/UserLists/UserLists.jsx';
 
 export default function Router(props) {
     const { token } = theme.useToken();
@@ -23,6 +24,8 @@ export default function Router(props) {
                 setUser={props.setUser}
                 openNotification={props.openNotification}
                 categories={props.categories}
+                lists={props.lists}
+                setLists={props.setLists}
             />
             <Layout>
                 <Content>
@@ -34,7 +37,7 @@ export default function Router(props) {
                                     paddingLeft: isMobile ? 0 : '20vw',
                                     paddingRight: isMobile ? 0 : '20vw',
                                     paddingBottom: 50,
-                                    minHeight: 'calc(100vh - 50px - 58px - 70px)',
+                                    minHeight: 'calc(100vh - 50px - 68px - 70px)',
                                 }}
                             >
                                 <Outlet />
@@ -76,6 +79,19 @@ export default function Router(props) {
                                           user={props.user}
                                           setUser={props.setUser}
                                           openNotification={props.openNotification}
+                                      />
+                                  ),
+                              },
+                              {
+                                  path: 'lists',
+                                  element: (
+                                      <UserLists
+                                          user={props.user}
+                                          setUser={props.setUser}
+                                          openNotification={props.openNotification}
+                                          categories={props.categories}
+                                          lists={props.lists}
+                                          setLists={props.setLists}
                                       />
                                   ),
                               },

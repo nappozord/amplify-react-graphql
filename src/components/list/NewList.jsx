@@ -1,4 +1,4 @@
-import { Avatar, Badge, Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Typography } from 'antd';
+import { Alert, Avatar, Badge, Button, Col, Divider, Form, Input, Modal, Row, Select, Space, Typography } from 'antd';
 import useMobile from '@utils/Mobile.jsx';
 import getColor from '@utils/Colors.jsx';
 import React, { useState } from 'react';
@@ -10,6 +10,7 @@ const { TextArea } = Input;
 export default function NewList(props) {
     const [loading, setLoading] = useState(false);
     const [image, setImage] = useState(null);
+    const [error, setError] = useState(null);
     const isMobile = useMobile();
 
     const options = [{ value: 'no', label: 'Nessuna' }];
@@ -20,22 +21,31 @@ export default function NewList(props) {
         });
 
     const onFinish = (values) => {
-        let list = {
-            idusers: props.user.idusers,
-            idcategory: values.category,
-            name: values.name,
-            description: values.description,
-            picture: image,
-        };
+        if (!values.name) setError('Inserisci un nome valido.');
+        else {
+            let list = {
+                idusers: props.user.idusers,
+                idcategory: values.category,
+                name: values.name,
+                description: values.description,
+                picture: image,
+            };
 
-        setLoading(true);
+            setLoading(true);
 
-        postList(list).then((r) => {
-            console.log(r);
-            setImage(null);
-            setLoading(false);
-            props.setOpen(false);
-        });
+            postList(props.user, list).then((r) => {
+                setImage(null);
+                setLoading(false);
+                props.setOpen(false);
+                setError(null);
+                props.setLists([...props.lists, list]);
+                props.openNotification(
+                    'Nuova lista aggiunta',
+                    'La tua lista ' + values.name + ' è stata creata con successo!',
+                    'success',
+                );
+            });
+        }
     };
 
     return (
@@ -87,6 +97,9 @@ export default function NewList(props) {
                                     <TextArea placeholder={'Descrizione'} autoSize={{ minRows: 2 }} />
                                 </Form.Item>
                             </Form.Item>
+                            {error ? (
+                                <Alert message={error} type="error" style={{ marginBottom: 16 }} showIcon />
+                            ) : null}
                             <Form.Item>
                                 <Button
                                     style={{ width: '100%' }}
