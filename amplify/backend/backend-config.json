@@ -25,6 +25,14 @@
           ],
           "category": "function",
           "resourceName": "listupGetList"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "listupGetSingleList"
         }
       ],
       "providerPlugin": "awscloudformation",
@@ -72,6 +80,11 @@
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
     },
+    "listupGetSingleList": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
     "listupGetUser": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -113,6 +126,22 @@
         {
           "category": "function",
           "resourceName": "listupGetList"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupGetSingleList_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetSingleList"
+        }
+      ]
+    },
+    "AMPLIFY_function_listupGetSingleList_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "listupGetSingleList"
         }
       ]
     },

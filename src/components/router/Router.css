@@ -1,5 +1,5 @@
 .curved-mask-top {
-    z-index: -9999;
+    z-index: -1;
     height: 70px;
     background-position: 50% 100%;
     background-image: url('./../../assets/mask.svg');

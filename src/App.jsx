@@ -24,10 +24,6 @@ export default function App() {
     };
 
     useEffect(() => {
-        console.log(lists);
-    }, [lists]);
-
-    useEffect(() => {
         if (!firstUpdate.current) localStorage.setItem('connectedUser', JSON.stringify(user));
     }, [user]);
 

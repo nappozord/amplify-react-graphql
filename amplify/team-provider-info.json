@@ -32,6 +32,10 @@
         "listupGetList": {
           "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
           "s3Key": "amplify-builds/listupGetList-42633968687853333879-build.zip"
+        },
+        "listupGetSingleList": {
+          "deploymentBucketName": "amplify-listupamplify-main-185249-deployment",
+          "s3Key": "amplify-builds/listupGetSingleList-4f653338523468727142-build.zip"
         }
       },
       "api": {

@@ -48,7 +48,7 @@ export async function getCategories(category) {
 }
 
 export async function postList(user, list) {
-    const path = '/user/' + user.email + '/list';
+    const path = '/user/' + user.email + '/lists';
     const myInit = {
         body: list,
     };
@@ -63,7 +63,7 @@ export async function postList(user, list) {
 }
 
 export async function getAllLists(user) {
-    const path = '/user/' + user.email + '/list';
+    const path = '/user/' + user.email + '/lists';
     const myInit = {
         response: true,
     };

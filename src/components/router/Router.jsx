@@ -12,6 +12,7 @@ import ComingSoon from '../../views/Errors/ComingSoon';
 import ModalPersonalInfo from '@components/manageAccount/ModalPersonalInfo.jsx';
 import useMobile from '@utils/Mobile.jsx';
 import UserLists from '@views/UserLists/UserLists.jsx';
+import SingleListView from '@views/UserLists/SingleListView.jsx';
 
 export default function Router(props) {
     const { token } = theme.useToken();
@@ -31,7 +32,7 @@ export default function Router(props) {
                 <Content>
                     <div style={{ backgroundColor: token.colorPrimaryBg, position: 'relative' }}>
                         <div />
-                        <div style={{ height: 500, paddingTop: 50 }}>
+                        <div style={{ height: 500, paddingTop: 50, zIndex: -2 }}>
                             <div
                                 style={{
                                     paddingLeft: isMobile ? 0 : '20vw',
@@ -84,16 +85,34 @@ export default function Router(props) {
                               },
                               {
                                   path: 'lists',
-                                  element: (
-                                      <UserLists
-                                          user={props.user}
-                                          setUser={props.setUser}
-                                          openNotification={props.openNotification}
-                                          categories={props.categories}
-                                          lists={props.lists}
-                                          setLists={props.setLists}
-                                      />
-                                  ),
+                                  children: [
+                                      {
+                                          index: true,
+                                          element: (
+                                              <UserLists
+                                                  user={props.user}
+                                                  setUser={props.setUser}
+                                                  openNotification={props.openNotification}
+                                                  categories={props.categories}
+                                                  lists={props.lists}
+                                                  setLists={props.setLists}
+                                              />
+                                          ),
+                                      },
+                                      {
+                                          path: ':list',
+                                          element: (
+                                              <SingleListView
+                                                  user={props.user}
+                                                  setUser={props.setUser}
+                                                  openNotification={props.openNotification}
+                                                  categories={props.categories}
+                                                  lists={props.lists}
+                                                  setLists={props.setLists}
+                                              />
+                                          ),
+                                      },
+                                  ],
                               },
                           ],
                       }

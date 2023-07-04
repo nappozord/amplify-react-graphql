@@ -21,9 +21,22 @@
         "setting": "open"
       }
     },
-    "/user/{email}/list": {
-      "name": "/user/{email}/list",
+    "/user/{email}/lists": {
+      "name": "/user/{email}/lists",
       "lambdaFunction": "listupGetList",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    "/user/{email}/lists/{list}": {
+      "name": "/user/{email}/lists/{list}",
+      "lambdaFunction": "listupGetSingleList",
       "permissions": {
         "setting": "private",
         "auth": [
